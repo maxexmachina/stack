@@ -15,6 +15,7 @@ int StackCtor(Stack *stack, size_t capacity) {
         return 0;
     }
     stack->size = 0;
+    stack->capacity = capacity;
     return 1;
 }
 
@@ -26,7 +27,6 @@ int StackGrow(Stack *stack) {
         printf("There was an error allocating memory : %s\n", strerror(errno));
         return 0;
     }
-    free(stack->data);
     stack->data = newData;
     stack->capacity = newCap;
     return 1;
@@ -40,7 +40,6 @@ int StackShrink(Stack *stack) {
         printf("There was an error allocating memory : %s\n", strerror(errno));
         return 0;
     }
-    free(stack->data);
     stack->data = newData;
     stack->capacity = newCap;
     return 1;
@@ -62,6 +61,7 @@ int StackPush(Stack *stack, int x) {
             return 0;
         }
     }
+    printf("pushing %d\n", x);
     stack->data[stack->size++] = x;
     return 1;
 }

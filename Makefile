@@ -15,7 +15,6 @@ CFLAGS += -Wdangling-else -Wduplicated-branches -Wformat-overflow=2 -Wformat-tru
 CFLAGS += -Wmultistatement-macros -Wrestrict -Wshadow=global -Wsuggest-attribute=malloc -fcheck-new 
 CFLAGS += -fsized-deallocation -fstrict-overflow 
 CFLAGS += -flto-odr-type-merging -fno-omit-frame-pointer -I include
-CFLAGS += -fsanitize=address
 BIN		= stack 
 RM		= rm -rf
 HDR		= include 

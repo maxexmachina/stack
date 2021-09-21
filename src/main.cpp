@@ -4,6 +4,7 @@
 
 int main() {
     Stack stack = {};
+    StackCtor(&stack, 2);
 
     StackPush(&stack, 10);
     StackPush(&stack, 1);
