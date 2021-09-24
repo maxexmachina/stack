@@ -1,7 +1,9 @@
 #include <sys/types.h>
 
+typedef int elem_t;
+
 struct Stack {
-    int *data;
+    elem_t *data;
     size_t size;
     size_t capacity;
 };
@@ -10,9 +12,9 @@ int StackCtor(Stack *stack, size_t capacity);
 
 void StackDtor(Stack *stack);
 
-int StackPop(Stack *stack, int *x);
+int StackPop(Stack *stack, elem_t *x);
 
-int StackPush(Stack *stack, int x);
+int StackPush(Stack *stack, elem_t x);
 
 int StackResize(Stack *stack, size_t size);
 

@@ -9,7 +9,7 @@
 
 int StackCtor(Stack *stack, size_t capacity) {
     assert(stack);
-    stack->data = (int *)calloc(capacity, sizeof(int));
+    stack->data = (elem_t *)calloc(capacity, sizeof(elem_t));
     if (stack->data == nullptr) {
         printf("There was an error constructing stack : %s\n", strerror(errno));
         return 0;
@@ -22,7 +22,7 @@ int StackCtor(Stack *stack, size_t capacity) {
 int StackResize(Stack *stack, size_t size) {
     assert(stack);
     const size_t newCap = size;
-    int *newData = (int *)realloc(stack->data, newCap * sizeof(int));
+    int *newData = (elem_t *)realloc(stack->data, newCap * sizeof(elem_t));
     if (newData == nullptr) {
         printf("There was an error allocating memory : %s\n", strerror(errno));
         return 0;
@@ -41,7 +41,7 @@ void StackDtor(Stack *stack) {
     stack->data = (int *)13;
 }
 
-int StackPush(Stack *stack, int x) {
+int StackPush(Stack *stack, elem_t x) {
     assert(stack);
     if (stack->size == stack->capacity) {
         if (StackResize(stack, stack->capacity * 2) == 0) {
@@ -54,7 +54,7 @@ int StackPush(Stack *stack, int x) {
     return 1;
 }
 
-int StackPop(Stack *stack, int *x) {
+int StackPop(Stack *stack, elem_t *x) {
     assert(stack);
     if (stack->size == 0) {
         printf("Can't pop from an empty stack\n");

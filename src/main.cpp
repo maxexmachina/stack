@@ -9,7 +9,7 @@ int main() {
     StackPush(&stack, 10);
     StackPush(&stack, 1);
     StackPush(&stack, 13);
-    int val = 0;
+    elem_t val = 0;
     StackPop(&stack, &val);
     printf("val : %d\n", val);
     StackPush(&stack, 14);
