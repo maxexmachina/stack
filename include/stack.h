@@ -14,8 +14,6 @@ int StackPop(Stack *stack, int *x);
 
 int StackPush(Stack *stack, int x);
 
-int StackGrow(Stack *stack);
-
-int StackShrink(Stack *stack);
+int StackResize(Stack *stack, size_t size);
 
 void StackPrint(Stack *stack);

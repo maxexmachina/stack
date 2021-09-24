@@ -13,6 +13,8 @@ int main() {
     StackPop(&stack, &val);
     printf("val : %d\n", val);
     StackPush(&stack, 14);
+    StackPop(&stack, &val);
+    StackPop(&stack, &val);
 
     StackPrint(&stack);
 

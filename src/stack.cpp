@@ -19,27 +19,15 @@ int StackCtor(Stack *stack, size_t capacity) {
     return 1;
 }
 
-int StackGrow(Stack *stack) {
+int StackResize(Stack *stack, size_t size) {
     assert(stack);
-    const size_t newCap = stack->capacity * 2;
+    const size_t newCap = size;
     int *newData = (int *)realloc(stack->data, newCap * sizeof(int));
     if (newData == nullptr) {
         printf("There was an error allocating memory : %s\n", strerror(errno));
         return 0;
     }
-    stack->data = newData;
-    stack->capacity = newCap;
-    return 1;
-}
-
-int StackShrink(Stack *stack) {
-    assert(stack);
-    const size_t newCap = stack->capacity / 2;
-    int *newData = (int *)realloc(stack->data, newCap * sizeof(int));
-    if (newData == nullptr) {
-        printf("There was an error allocating memory : %s\n", strerror(errno));
-        return 0;
-    }
+    printf("Resizing to %zu\n", newCap);
     stack->data = newData;
     stack->capacity = newCap;
     return 1;
@@ -56,7 +44,7 @@ void StackDtor(Stack *stack) {
 int StackPush(Stack *stack, int x) {
     assert(stack);
     if (stack->size == stack->capacity) {
-        if (StackGrow(stack) == 0) {
+        if (StackResize(stack, stack->capacity * 2) == 0) {
             printf("There was an error growing stack\n");
             return 0;
         }
@@ -74,7 +62,7 @@ int StackPop(Stack *stack, int *x) {
     }
     *x = stack->data[--stack->size];
     if (stack->size > 0 && stack->size == stack->capacity / 4) {
-        if (StackShrink(stack) == 0) {
+        if (StackResize(stack, stack->capacity / 2) == 0) {
             printf("There was an error shrinking stack\n");
             return 0;
         }
