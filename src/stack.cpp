@@ -49,7 +49,7 @@ int StackPush(Stack *stack, elem_t x) {
             return 0;
         }
     }
-    printf("pushing %d\n", x);
+    //printf("pushing %d\n", x);
     stack->data[stack->size++] = x;
     return 1;
 }

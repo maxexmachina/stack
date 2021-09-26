@@ -15,8 +15,14 @@ int main() {
     StackPush(&stack, 14);
     StackPop(&stack, &val);
     StackPop(&stack, &val);
+    for (size_t i = 0; i < 10000000; ++i) {
+        StackPush(&stack, i);
+    }
+    for (size_t i = 0; i < 9000000; ++i) {
+        StackPop(&stack, &val);
+    }
 
-    StackPrint(&stack);
+    //StackPrint(&stack);
 
     StackDtor(&stack);
 }
