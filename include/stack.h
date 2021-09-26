@@ -1,21 +1,32 @@
+#ifndef STACK_H
+#define STACK_H
+
 #include <sys/types.h>
 
-typedef int elem_t;
+enum {
+    STACK_UNDERFL,
+    STACK_NOMMRY
+};
 
 struct Stack {
-    elem_t *data;
+    void *data;
+    size_t elem_size;
     size_t size;
     size_t capacity;
 };
 
-int StackCtor(Stack *stack, size_t capacity);
+void *myMemCpy(void *dest, void *src, size_t n);
+
+void StackCtor(Stack *stack, size_t el_size, size_t capacity, int *err = nullptr);
 
 void StackDtor(Stack *stack);
 
-int StackPop(Stack *stack, elem_t *x);
+void StackPop(Stack *stack, void *dest, int *err = nullptr);
 
-int StackPush(Stack *stack, elem_t x);
+void StackPush(Stack *stack, void *src, int *err = nullptr);
 
 int StackResize(Stack *stack, size_t size);
 
 void StackPrint(Stack *stack);
+
+#endif

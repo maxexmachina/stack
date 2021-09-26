@@ -2,27 +2,44 @@
 
 #include "../include/stack.h"
 
+struct meme {
+    long long a;
+    long long b;
+};
+
 int main() {
     Stack stack = {};
-    StackCtor(&stack, 2);
+    int a = 1;
+    int b = 10;
+    int c = 13;
+    int d = 14;
 
-    StackPush(&stack, 10);
-    StackPush(&stack, 1);
-    StackPush(&stack, 13);
-    elem_t val = 0;
+    StackCtor(&stack, sizeof(a), 2);
+
+    StackPush(&stack, &a);
+    StackPush(&stack, &b);
+    StackPush(&stack, &c);
+    int val = 0;
     StackPop(&stack, &val);
     printf("val : %d\n", val);
-    StackPush(&stack, 14);
+    StackPush(&stack, &d);
     StackPop(&stack, &val);
+    printf("val : %d\n", val);
     StackPop(&stack, &val);
-    for (size_t i = 0; i < 10000000; ++i) {
-        StackPush(&stack, i);
-    }
-    for (size_t i = 0; i < 9000000; ++i) {
-        StackPop(&stack, &val);
+    printf("val : %d\n", val);
+
+    StackPrint(&stack);
+
+    StackDtor(&stack);
+
+    meme v = {.a = 12341234, .b = 12341235};
+    StackCtor(&stack, sizeof(meme), 2);
+    for (size_t i = 0; i < 1000; ++i) {
+        StackPush(&stack, &v); 
     }
 
-    //StackPrint(&stack);
-
+    for (size_t i = 0; i < 900; ++i) {
+        StackPop(&stack, &v);
+    }
     StackDtor(&stack);
 }
