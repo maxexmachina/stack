@@ -6,6 +6,7 @@
 #include <limits.h>
 
 #include "../include/stack.h"
+#include "../include/log.h"
 
 void *myMemCpy(void *dest, void *src, size_t n) {
     char *cDest = (char *)dest;
@@ -52,8 +53,8 @@ int StackError(Stack *stack) {
 }
 
 int StackDump_(Stack *stack, int errCode, const char *reason, callInfo info) {
-    printf("Dumping stack from %s() in %s at (%d)\n", stack->funcName, stack->file, stack->line);
-    printf("Dump called from %s() in %s at (%d)\n", info.funcName, info.file, info.line);
+    writeToLog("Dumping stack from %s() in %s at (%d)\n", stack->funcName, stack->file, stack->line);
+    writeToLog("Dump called from %s() in %s at (%d)\n", info.funcName, info.file, info.line);
     return 1;
 }
 

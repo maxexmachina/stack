@@ -2,12 +2,17 @@
 
 #include "../include/log.h"
 
+int initLog() {
+    logFile = fopen("stack_log.txt", "w");
+    if (logFile == nullptr) {
+        return LOG_OPN_FAIL;
+    }
+    return 1;
+}
+
 int writeToLog(const char *format ...) {
     if (logFile == nullptr) {
-        logFile = fopen("stack_log.txt", "a");
-        if (logFile == nullptr) {
-            return LOG_OPN_FAIL;
-        }
+        initLog();
     }
 
     va_list arg_ptr;

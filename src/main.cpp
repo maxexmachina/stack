@@ -1,6 +1,9 @@
 #include <stdio.h>
+#include <string.h>
+#include <errno.h>
 
 #include "../include/stack.h"
+#include "../include/log.h"
 
 struct meme {
     long long a;
@@ -42,4 +45,8 @@ int main() {
         StackPop(&stack, &v);
     }
     StackDtor(&stack);
+
+    if (closeLog() != 1) {
+        printf("There was an error closing log file : %s\n", strerror(errno));
+    }
 }
