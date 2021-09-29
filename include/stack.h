@@ -13,6 +13,21 @@
 
 #define DEBUG_MODE
 
+//------------------ User type -------------
+
+struct myStruct {
+    long long a;
+    long long b;
+};
+
+static const char *typeName = "struct meme";
+
+typedef myStruct elem_t;
+
+char *formatInstance(elem_t instance);
+
+//------------------------------------------
+
 enum InvError : int {
     STK_NULL = 1,
     STK_NEG_CAP = 2,
@@ -34,11 +49,13 @@ const size_t DEFAULT_STACK_CAPACITY = 10;
 
 struct Stack {
     void *data;
-    size_t elem_size;
+    size_t elemSize;
     size_t size;
     size_t capacity;
 
 #ifdef DEBUG_MODE
+    const char *typeName;
+
     const char *funcName;
     const char *file;
     int line;

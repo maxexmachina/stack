@@ -4,8 +4,11 @@
 #include <stdio.h>
 
 static FILE *logFile = nullptr;
-static const int LOG_OPN_FAIL = -2;
-static const int LOG_WRT_FAIL = -1;
+
+enum LogErr : int {
+    LOG_OPN_FAIL = -1,
+    LOG_WRT_FAIL = -2,
+};
 
 int initLog();
 

@@ -42,6 +42,18 @@ void *myMemCpy(void *dest, void *src, size_t n) {
     return dest;
 }
 
+char *formatInstance(elem_t instance) {
+    char *formatted = (char *)calloc(64, sizeof(*formatted));
+    if (formatted == nullptr) {
+        return nullptr;
+    }
+    if (sprintf(formatted, "a : %lld, b : %lld", instance.a, instance.b) < 0) {
+        free(formatted);
+        return nullptr;
+    }
+    return formatted;
+}
+
 int StackError(Stack *stack) {
     if (!stack) {
         return STK_NULL;
@@ -53,8 +65,26 @@ int StackError(Stack *stack) {
 }
 
 int StackDump_(Stack *stack, int errCode, const char *reason, callInfo info) {
-    writeToLog("Dumping stack from %s() in %s at (%d)\n", stack->funcName, stack->file, stack->line);
-    writeToLog("Dump called from %s() in %s at (%d)\n", info.funcName, info.file, info.line);
+    writeToLog("Stack<%s>[%p] called from %s() at %s (%d) ok \"stk\" at %s() at %s (%d)\n",
+                typeName, (void *)stack, info.funcName, info.file, info.line,
+                stack->funcName, stack->file, stack->line);  
+    writeToLog("{\n");
+    writeToLog("size = %zu\ncapacity = %zu\ndata[%p]:\n", stack->size, stack->capacity, (void *)stack->data);
+    writeToLog("{\n");
+    for (size_t i = 0; i < stack->capacity; ++i) {
+        if (i < stack->size) {
+            char *format = formatInstance(*(elem_t *)((char *)stack->data + i * stack->elemSize));
+            if (format == nullptr) {
+                return 0;
+            }
+            writeToLog("*[%zu] = %s\n", i, format); 
+            free(format);
+        } else {
+            writeToLog("[%zu] = haha\n", i);
+        }
+    }
+    writeToLog("}\n");
+    writeToLog("}\n");
     return 1;
 }
 
@@ -67,7 +97,7 @@ int StackCtor_(Stack *stack, size_t el_size, size_t capacity, callInfo info) {
         }
     }
     stack->size = 0;
-    stack->elem_size = el_size;
+    stack->elemSize = el_size;
     stack->capacity = capacity;
 
 #ifdef DEBUG_MODE
@@ -87,7 +117,7 @@ int StackResize(Stack *stack, size_t size) {
 #endif
 
     const size_t newCap = size;
-    void *newData = realloc(stack->data, newCap * stack->elem_size);
+    void *newData = realloc(stack->data, newCap * stack->elemSize);
     if (newData == nullptr) {
         printf("There was an error allocating memory : %s\n", strerror(errno));
         return 0;
@@ -107,7 +137,7 @@ void StackDtor(Stack *stack) {
     ASSERT_OK(stack);
 #endif
 
-    memset(stack->data, 0xF0, stack->capacity * stack->elem_size);
+    memset(stack->data, 0xF0, stack->capacity * stack->elemSize);
     stack->size = UINT_MAX;
     free(stack->data);
     stack->data = (int *)13;
@@ -134,7 +164,7 @@ void StackPush(Stack *stack, void *src, int *err) {
             return;
         }
     }
-    myMemCpy((char *)stack->data + stack->size++ * stack->elem_size, src, stack->elem_size);
+    myMemCpy((char *)stack->data + stack->size++ * stack->elemSize, src, stack->elemSize);
 
 #ifdef DEBUG_MODE
     ASSERT_OK(stack);
@@ -154,7 +184,7 @@ void StackPop(Stack *stack, void *dest, int *err) {
         } 
         return;
     }
-    myMemCpy(dest, (char *)stack->data + --stack->size * stack->elem_size, stack->elem_size);
+    myMemCpy(dest, (char *)stack->data + --stack->size * stack->elemSize, stack->elemSize);
     if (stack->size > 0 && stack->size == stack->capacity / 4) {
         if (StackResize(stack, stack->capacity / 2) == 0) {
             printf("There was an error shrinking stack\n");
@@ -172,6 +202,6 @@ void StackPop(Stack *stack, void *dest, int *err) {
 
 void StackPrint(Stack *stack) {
     for (size_t i = 0; i < stack->size; i++) {
-        printf("%d\n", (int)*((char *)stack->data + i * stack->elem_size));
+        printf("%d\n", (int)*((char *)stack->data + i * stack->elemSize));
     }
 }

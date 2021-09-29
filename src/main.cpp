@@ -5,11 +5,6 @@
 #include "../include/stack.h"
 #include "../include/log.h"
 
-struct meme {
-    long long a;
-    long long b;
-};
-
 int main() {
     Stack stack = {};
     int a = 1;
@@ -35,8 +30,8 @@ int main() {
 
     StackDtor(&stack);
 
-    meme v = {.a = 12341234, .b = 12341235};
-    StackCtor(&stack, sizeof(meme), 2);
+    elem_t v = {.a = 12341234, .b = 12341235};
+    StackCtor(&stack, sizeof(elem_t), 2);
     for (size_t i = 0; i < 1000; ++i) {
         StackPush(&stack, &v); 
     }
