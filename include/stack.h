@@ -20,7 +20,7 @@ struct myStruct {
     long long b;
 };
 
-static const char *typeName = "struct meme";
+static const char *typeName = "myStruct";
 
 typedef myStruct elem_t;
 
@@ -28,15 +28,12 @@ char *formatInstance(elem_t instance);
 
 //------------------------------------------
 
-enum InvError : int {
+enum StkError : int {
     STK_NULL = 1,
     STK_NEG_CAP = 2,
     STK_CAP_OVERFL = 3,
-};
-
-enum StkError : int {
-    STACK_UNDERFL = 1,
-    STACK_NOMMRY = 2,
+    STK_UNDERFL = 4,
+    STK_NOMMRY = 5,
 };
 
 struct callInfo {
@@ -44,8 +41,6 @@ struct callInfo {
     const char *file;
     int line;
 };
-
-const size_t DEFAULT_STACK_CAPACITY = 10;
 
 struct Stack {
     void *data;
@@ -62,11 +57,13 @@ struct Stack {
 #endif
 };
 
+const size_t DEFAULT_STACK_CAPACITY = 10;
+
 void *myMemCpy(void *dest, void *src, size_t n);
 
 int StackError(Stack *stack);
 
-int StackDump_(Stack *stack, int errCode, const char *reason, callInfo info);
+int StackDump_(Stack *stack, const char *reason, callInfo info);
 
 int StackCtor_(Stack *stack, size_t el_size, size_t capacity, callInfo info);
 
@@ -78,13 +75,13 @@ void StackPush(Stack *stack, void *src, int *err = nullptr);
 
 int StackResize(Stack *stack, size_t size);
 
-void StackPrint(Stack *stack);
-
-#define ASSERT_OK(STACK)            \
-do {                                \
-    int ret = StackError(STACK);    \
-    if (ret != 0)                   \
-        assert(!"bad" #STACK);      \
+#define ASSERT_OK(STACK)                        \
+do {                                            \
+    int ret = StackError(STACK);                \
+    if (ret != 0) {                             \
+        StackDump(STACK, "ASSERT_OK failed");   \
+        assert(!"bad" #STACK);                  \
+    }                                           \
 } while (0)
 
 #define StackCtor(stack, el_size, capacity)    \
@@ -96,13 +93,13 @@ do {                                           \
     StackCtor_(stack, el_size, capacity, inf); \
 } while (0)
 
-#define StackDump(stack, errCode, reason)      \
+#define StackDump(stack, reason)      \
 do {                                           \
     callInfo inf = {};                         \
     inf.funcName = __FUNCTION_NAME__;          \
     inf.file = __FILE__;                       \
     inf.line = __LINE__;                       \
-    StackDump_(stack, errCode, reason, inf);   \
+    StackDump_(stack, reason, inf);   \
 } while (0)
 
 #endif

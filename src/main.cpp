@@ -26,17 +26,17 @@ int main() {
     StackPop(&stack, &val);
     printf("val : %d\n", val);
 
-    StackPrint(&stack);
-
     StackDtor(&stack);
 
+    stack = {};
     elem_t v = {.a = 12341234, .b = 12341235};
     StackCtor(&stack, sizeof(elem_t), 2);
-    for (size_t i = 0; i < 1000; ++i) {
+    for (size_t i = 0; i < 100; ++i) {
         StackPush(&stack, &v); 
     }
+    StackDump(&stack, "Diagnostic");
 
-    for (size_t i = 0; i < 900; ++i) {
+    for (size_t i = 0; i < 150; ++i) {
         StackPop(&stack, &v);
     }
     StackDtor(&stack);

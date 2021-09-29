@@ -64,13 +64,23 @@ int StackError(Stack *stack) {
     return 0;
 }
 
-int StackDump_(Stack *stack, int errCode, const char *reason, callInfo info) {
-    writeToLog("Stack<%s>[%p] called from %s() at %s (%d) ok \"stk\" at %s() at %s (%d)\n",
-                typeName, (void *)stack, info.funcName, info.file, info.line,
-                stack->funcName, stack->file, stack->line);  
+int StackDump_(Stack *stack, const char *reason, callInfo info) {
+    int errCode = StackError(stack);
+    writeToLog("Stack<%s>[%p] called from %s() at %s (%d) ", 
+                typeName, (void *)stack, info.funcName, info.file, info.line);
+
+    if (errCode == 0) {
+        writeToLog("ok ");
+    } else {
+        writeToLog("err %d ", errCode);
+    }
+
+    writeToLog("\"stk\" at %s() at %s (%d)\n", stack->funcName, stack->file, stack->line);
     writeToLog("{\n");
+    writeToLog("Dump reason : %s\n", reason);
     writeToLog("size = %zu\ncapacity = %zu\ndata[%p]:\n", stack->size, stack->capacity, (void *)stack->data);
     writeToLog("{\n");
+
     for (size_t i = 0; i < stack->capacity; ++i) {
         if (i < stack->size) {
             char *format = formatInstance(*(elem_t *)((char *)stack->data + i * stack->elemSize));
@@ -85,6 +95,9 @@ int StackDump_(Stack *stack, int errCode, const char *reason, callInfo info) {
     }
     writeToLog("}\n");
     writeToLog("}\n");
+    if (errCode != 0) {
+        closeLog();
+    }
     return 1;
 }
 
@@ -93,7 +106,7 @@ int StackCtor_(Stack *stack, size_t el_size, size_t capacity, callInfo info) {
         stack->data = calloc(capacity, el_size);
         if (stack->data == nullptr) {
             printf("There was an error allocating memory for the stack : %s\n", strerror(errno));
-            return STACK_NOMMRY;
+            return STK_NOMMRY;
         }
     }
     stack->size = 0;
@@ -105,7 +118,6 @@ int StackCtor_(Stack *stack, size_t el_size, size_t capacity, callInfo info) {
     stack->file = info.file;
     stack->line = info.line; 
 
-    StackDump(stack, 0, "meme"); 
     ASSERT_OK(stack);
 #endif
     return 1;
@@ -122,7 +134,6 @@ int StackResize(Stack *stack, size_t size) {
         printf("There was an error allocating memory : %s\n", strerror(errno));
         return 0;
     }
-    printf("Resizing to %zu\n", newCap);
     stack->data = newData;
     stack->capacity = newCap;
 
@@ -159,7 +170,7 @@ void StackPush(Stack *stack, void *src, int *err) {
         if (StackResize(stack, newCap) == 0) {
             printf("There was an error growing stack\n");
             if (err) {
-                *err = STACK_NOMMRY;
+                *err = STK_NOMMRY;
             }
             return;
         }
@@ -180,7 +191,7 @@ void StackPop(Stack *stack, void *dest, int *err) {
     if (stack->size == 0) {
         printf("Can't pop from an empty stack\n");
         if (err) {
-            *err = STACK_UNDERFL;
+            *err = STK_UNDERFL;
         } 
         return;
     }
@@ -189,7 +200,7 @@ void StackPop(Stack *stack, void *dest, int *err) {
         if (StackResize(stack, stack->capacity / 2) == 0) {
             printf("There was an error shrinking stack\n");
             if (err) {
-                *err = STACK_NOMMRY;
+                *err = STK_NOMMRY;
             }
             return;
         }
@@ -198,10 +209,4 @@ void StackPop(Stack *stack, void *dest, int *err) {
 #ifdef DEBUG_MODE
     ASSERT_OK(stack);
 #endif
-}
-
-void StackPrint(Stack *stack) {
-    for (size_t i = 0; i < stack->size; i++) {
-        printf("%d\n", (int)*((char *)stack->data + i * stack->elemSize));
-    }
 }
