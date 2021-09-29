@@ -59,10 +59,12 @@ int StackDump_(Stack *stack, int errCode, const char *reason, callInfo info) {
 }
 
 int StackCtor_(Stack *stack, size_t el_size, size_t capacity, callInfo info) {
-    stack->data = calloc(capacity, el_size);
-    if (stack->data == nullptr) {
-        printf("There was an error allocating memory for the stack : %s\n", strerror(errno));
-        return STACK_NOMMRY;
+    if (capacity != 0) {
+        stack->data = calloc(capacity, el_size);
+        if (stack->data == nullptr) {
+            printf("There was an error allocating memory for the stack : %s\n", strerror(errno));
+            return STACK_NOMMRY;
+        }
     }
     stack->size = 0;
     stack->elem_size = el_size;
@@ -118,7 +120,13 @@ void StackPush(Stack *stack, void *src, int *err) {
 #endif
 
     if (stack->size == stack->capacity) {
-        if (StackResize(stack, stack->capacity * 2) == 0) {
+        size_t newCap = 0;
+        if (stack->capacity == 0) {
+            newCap = DEFAULT_STACK_CAPACITY;
+        } else {
+            newCap = stack->capacity * 2;
+        }
+        if (StackResize(stack, newCap) == 0) {
             printf("There was an error growing stack\n");
             if (err) {
                 *err = STACK_NOMMRY;

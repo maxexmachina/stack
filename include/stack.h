@@ -30,6 +30,8 @@ struct callInfo {
     int line;
 };
 
+const size_t DEFAULT_STACK_CAPACITY = 10;
+
 struct Stack {
     void *data;
     size_t elem_size;
