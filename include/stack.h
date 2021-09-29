@@ -3,9 +3,31 @@
 
 #include <sys/types.h>
 
-enum {
-    STACK_UNDERFL,
-    STACK_NOMMRY
+#ifndef __FUNCTION_NAME__
+    #ifdef WIN32   //WINDOWS
+        #define __FUNCTION_NAME__   __FUNCTION__  
+    #else          //*NIX
+        #define __FUNCTION_NAME__   __func__ 
+    #endif
+#endif
+
+#define DEBUG_MODE
+
+enum InvError : int {
+    STK_NULL = 1,
+    STK_NEG_CAP = 2,
+    STK_CAP_OVERFL = 3,
+};
+
+enum StkError : int {
+    STACK_UNDERFL = 1,
+    STACK_NOMMRY = 2,
+};
+
+struct callInfo {
+    const char *funcName;
+    const char *file;
+    int line;
 };
 
 struct Stack {
@@ -13,11 +35,21 @@ struct Stack {
     size_t elem_size;
     size_t size;
     size_t capacity;
+
+#ifdef DEBUG_MODE
+    const char *funcName;
+    const char *file;
+    int line;
+#endif
 };
 
 void *myMemCpy(void *dest, void *src, size_t n);
 
-void StackCtor(Stack *stack, size_t el_size, size_t capacity, int *err = nullptr);
+int StackError(Stack *stack);
+
+int StackDump_(Stack *stack, int errCode, const char *reason, callInfo info);
+
+int StackCtor_(Stack *stack, size_t el_size, size_t capacity, callInfo info);
 
 void StackDtor(Stack *stack);
 
@@ -28,5 +60,30 @@ void StackPush(Stack *stack, void *src, int *err = nullptr);
 int StackResize(Stack *stack, size_t size);
 
 void StackPrint(Stack *stack);
+
+#define ASSERT_OK(STACK)            \
+do {                                \
+    int ret = StackError(STACK);    \
+    if (ret != 0)                   \
+        assert(!"bad" #STACK);      \
+} while (0)
+
+#define StackCtor(stack, el_size, capacity)    \
+do {                                           \
+    callInfo inf = {};                         \
+    inf.funcName = __FUNCTION_NAME__;          \
+    inf.file = __FILE__;                       \
+    inf.line = __LINE__;                       \
+    StackCtor_(stack, el_size, capacity, inf); \
+} while (0)
+
+#define StackDump(stack, errCode, reason)      \
+do {                                           \
+    callInfo inf = {};                         \
+    inf.funcName = __FUNCTION_NAME__;          \
+    inf.file = __FILE__;                       \
+    inf.line = __LINE__;                       \
+    StackDump_(stack, errCode, reason, inf);   \
+} while (0)
 
 #endif
