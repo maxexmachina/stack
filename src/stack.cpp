@@ -42,12 +42,15 @@ void *myMemCpy(void *dest, void *src, size_t n) {
     return dest;
 }
 
-char *formatInstance(elem_t instance) {
+char *formatInstance(const elem_t *instance) {
+    if (!instance) {
+        return nullptr;
+    }
     char *formatted = (char *)calloc(64, sizeof(*formatted));
     if (formatted == nullptr) {
         return nullptr;
     }
-    if (sprintf(formatted, "a : %lld, b : %lld", instance.a, instance.b) < 0) {
+    if (sprintf(formatted, "a : %lld, b : %lld", instance->a, instance->b) < 0) {
         free(formatted);
         return nullptr;
     }
@@ -64,7 +67,24 @@ int StackError(Stack *stack) {
     return 0;
 }
 
-int StackDump_(Stack *stack, const char *reason, callInfo info) {
+int writeErrCode(int err) {
+    switch (err) {
+        case STK_NULL:
+            writeToLog("STK_NULL ");
+            break;
+        case STK_NEG_CAP:
+            writeToLog("STK_NEG_CAP ");
+            break;
+        case STK_CAP_OVERFL:
+            writeToLog("STK_CAP_OVERFL ");
+            break;
+        default:
+            writeToLog("UNDEFINED ");
+    }
+    return 1;
+}
+
+int StackDump_(Stack *stack, const char *reason, callInfo info, const char *stkName) {
     int errCode = StackError(stack);
     writeToLog("Stack<%s>[%p] called from %s() at %s (%d) ", 
                 typeName, (void *)stack, info.funcName, info.file, info.line);
@@ -72,29 +92,40 @@ int StackDump_(Stack *stack, const char *reason, callInfo info) {
     if (errCode == 0) {
         writeToLog("ok ");
     } else {
-        writeToLog("err %d ", errCode);
+        writeErrCode(errCode);
     }
 
-    writeToLog("\"stk\" at %s() at %s (%d)\n", stack->funcName, stack->file, stack->line);
-    writeToLog("{\n");
-    writeToLog("Dump reason : %s\n", reason);
-    writeToLog("size = %zu\ncapacity = %zu\ndata[%p]:\n", stack->size, stack->capacity, (void *)stack->data);
-    writeToLog("{\n");
+    writeToLog("%s at %s() at %s (%d)\n"
+               "{\n"
+               "Dump reason : %s\n",
+               stkName, stack->funcName, stack->file, stack->line, reason);
 
-    for (size_t i = 0; i < stack->capacity; ++i) {
-        if (i < stack->size) {
-            char *format = formatInstance(*(elem_t *)((char *)stack->data + i * stack->elemSize));
-            if (format == nullptr) {
-                return 0;
-            }
-            writeToLog("*[%zu] = %s\n", i, format); 
-            free(format);
+    if (!stack) {
+        writeToLog("stack : nullptr\n");
+    } else {
+        writeToLog("size = %zu\ncapacity = %zu\ndata[%p]:\n"
+                   "{\n", stack->size, stack->capacity, (void *)stack->data);
+
+        if (!stack->data) {
+            writeToLog("stack->data : nullptr\n");
         } else {
-            writeToLog("[%zu] = haha\n", i);
+            for (size_t i = 0; i < stack->capacity; ++i) {
+                if (i < stack->size) {
+                    writeToLog("*[%zu] = ", i);
+                    char *format = formatInstance((elem_t *)((char *)stack->data + i * stack->elemSize));
+                    if (format != nullptr) {
+                        writeToLog("%s\n", format); 
+                        free(format);
+                    }
+                } else {
+                    writeToLog("[%zu] = %d\n", i, *(int *)((char *)stack->data + i * stack->elemSize));
+                }
+            }
         }
+        writeToLog("}\n"
+                   "}\n");
     }
-    writeToLog("}\n");
-    writeToLog("}\n");
+
     if (errCode != 0) {
         closeLog();
     }

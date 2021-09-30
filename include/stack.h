@@ -24,7 +24,7 @@ static const char *typeName = "myStruct";
 
 typedef myStruct elem_t;
 
-char *formatInstance(elem_t instance);
+char *formatInstance(const elem_t *instance);
 
 //------------------------------------------
 
@@ -63,7 +63,7 @@ void *myMemCpy(void *dest, void *src, size_t n);
 
 int StackError(Stack *stack);
 
-int StackDump_(Stack *stack, const char *reason, callInfo info);
+int StackDump_(Stack *stack, const char *reason, callInfo info, const char *stkName);
 
 int StackCtor_(Stack *stack, size_t el_size, size_t capacity, callInfo info);
 
@@ -80,7 +80,7 @@ do {                                            \
     int ret = StackError(STACK);                \
     if (ret != 0) {                             \
         StackDump(STACK, "ASSERT_OK failed");   \
-        assert(!"bad" #STACK);                  \
+        assert(!"Invariant failure");           \
     }                                           \
 } while (0)
 
@@ -99,7 +99,7 @@ do {                                           \
     inf.funcName = __FUNCTION_NAME__;          \
     inf.file = __FILE__;                       \
     inf.line = __LINE__;                       \
-    StackDump_(stack, reason, inf);   \
+    StackDump_(stack, reason, inf, #stack);   \
 } while (0)
 
 #endif
