@@ -12,7 +12,9 @@ int initLog() {
 
 int writeToLog(const char *format ...) {
     if (logFile == nullptr) {
-        initLog();
+        if (initLog() == LOG_OPN_FAIL) {
+            return LOG_OPN_FAIL;
+        } 
     }
 
     va_list arg_ptr;
@@ -22,7 +24,7 @@ int writeToLog(const char *format ...) {
     if (ret < 0) {
         return LOG_WRT_FAIL;
     } else {
-        return ret; 
+        return 1; 
     }
 }
 

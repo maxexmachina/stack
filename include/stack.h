@@ -2,6 +2,7 @@
 #define STACK_H
 
 #include <sys/types.h>
+#include <limits.h>
 
 #ifndef __FUNCTION_NAME__
     #ifdef WIN32   //WINDOWS
@@ -28,7 +29,8 @@ char *formatInstance(const elem_t *instance);
 
 //------------------------------------------
 
-static const int STK_POISON = 0x0F;
+static const int STK_DATA_POISON = 0x0F;
+static const size_t STK_SIZE_POISON = UINT_MAX; 
 
 enum StkError : int {
     STK_NULL = 1,
@@ -61,9 +63,9 @@ struct Stack {
 
 const size_t DEFAULT_STACK_CAPACITY = 10;
 
-void *myMemCpy(void *dest, void *src, size_t n);
-
 int StackError(Stack *stack);
+
+int writeErrCode(int err);
 
 int StackDump_(Stack *stack, const char *reason, callInfo info, const char *stkName);
 

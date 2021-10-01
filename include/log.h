@@ -7,7 +7,7 @@ static FILE *logFile = nullptr;
 
 enum LogErr : int {
     LOG_OPN_FAIL = -1,
-    LOG_WRT_FAIL = -2,
+    LOG_WRT_FAIL = 0,
 };
 
 int initLog();
