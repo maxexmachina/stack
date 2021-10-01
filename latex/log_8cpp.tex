@@ -1,0 +1,56 @@
+\hypertarget{log_8cpp}{}\doxysection{src/log.cpp File Reference}
+\label{log_8cpp}\index{src/log.cpp@{src/log.cpp}}
+{\ttfamily \#include $<$stdarg.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}../include/log.\+h\char`\"{}}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{log_8cpp_a00053e80663e6dccbe519cb549c5cf26}{init\+Log}} ()
+\item 
+int \mbox{\hyperlink{log_8cpp_a52cdc2554f9440eadc5454f99a2923ea}{write\+To\+Log}} (const char $\ast$format ...)
+\item 
+int \mbox{\hyperlink{log_8cpp_a578c082a639b42024e6e03e8ced94ad4}{close\+Log}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{log_8cpp_a578c082a639b42024e6e03e8ced94ad4}\label{log_8cpp_a578c082a639b42024e6e03e8ced94ad4}} 
+\index{log.cpp@{log.cpp}!closeLog@{closeLog}}
+\index{closeLog@{closeLog}!log.cpp@{log.cpp}}
+\doxysubsubsection{\texorpdfstring{closeLog()}{closeLog()}}
+{\footnotesize\ttfamily int close\+Log (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Closes the log file
+
+\begin{DoxyReturn}{Returns}
+1 on success, 0 on failure 
+\end{DoxyReturn}
+\mbox{\Hypertarget{log_8cpp_a00053e80663e6dccbe519cb549c5cf26}\label{log_8cpp_a00053e80663e6dccbe519cb549c5cf26}} 
+\index{log.cpp@{log.cpp}!initLog@{initLog}}
+\index{initLog@{initLog}!log.cpp@{log.cpp}}
+\doxysubsubsection{\texorpdfstring{initLog()}{initLog()}}
+{\footnotesize\ttfamily int init\+Log (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Opens the log file and saves the file handle
+
+\begin{DoxyReturn}{Returns}
+1 on success, LOG\+\_\+\+OPN\+\_\+\+FAIL on failure 
+\end{DoxyReturn}
+\mbox{\Hypertarget{log_8cpp_a52cdc2554f9440eadc5454f99a2923ea}\label{log_8cpp_a52cdc2554f9440eadc5454f99a2923ea}} 
+\index{log.cpp@{log.cpp}!writeToLog@{writeToLog}}
+\index{writeToLog@{writeToLog}!log.cpp@{log.cpp}}
+\doxysubsubsection{\texorpdfstring{writeToLog()}{writeToLog()}}
+{\footnotesize\ttfamily int write\+To\+Log (\begin{DoxyParamCaption}\item[{const char $\ast$}]{format ... }\end{DoxyParamCaption})}
+
+Writes a formatted string with parameters to the log file
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em format} & Formatted string with parameters \\
+\hline
+\mbox{\texttt{ in}}  & {\em ...} & List of parameters to substitute in the string\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 on success, LOG\+\_\+\+WRITE\+\_\+\+FAIL on write failure, LOG\+\_\+\+OPN\+\_\+\+FAIL on log open failure 
+\end{DoxyReturn}

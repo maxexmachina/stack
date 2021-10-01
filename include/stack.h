@@ -79,20 +79,83 @@ struct Stack {
 //! Default stack capacity
 const size_t DEFAULT_STACK_CAPACITY = 10;
 
+//------------------------------------------------------------ 
+//! Checks if the given stack is valid
+//!
+//! @param[in]  stack   Pointer to the stack to check
+//!
+//! @return 0 if the stack is valid, one of the values of the StkError otherwise
+//------------------------------------------------------------ 
 int StackError(Stack *stack);
 
+//------------------------------------------------------------ 
+//! Writes given error code in a string form to the log file
+//! 
+//! @param[in]  err Error code that corresponds to one of the values in StkError enum
+//!
+//! @return 1 on success, 0 on failure
+//------------------------------------------------------------ 
 int writeErrCode(int err);
 
+//------------------------------------------------------------ 
+//! Prints all information about the stack to the log file
+//!
+//! @param[in]  stack   Pointer to the stack
+//! @param[in]  reason  String with reason for stack dump
+//! @param[in]  info    Struct with information about function call location
+//! @param[in]  stkName String name of the stack
+//!
+//! @return 1 on success, 0 on failure
+//------------------------------------------------------------ 
 int StackDump_(Stack *stack, const char *reason, callInfo info, const char *stkName);
 
-int StackCtor_(Stack *stack, size_t el_size, size_t capacity, callInfo info);
+//------------------------------------------------------------ 
+//! Constructs the stack of given type with given capacity
+//!
+//! @param[out]  stack      Pointer to stack
+//! @param[in]  elemSize    Size of the stored data type in bytes  
+//! @param[in]  capacity    Desired capacity of the stack
+//! @param[in]  info        Information about the constructor function call    
+//!
+//! @return 1 on success, 0 on failure
+//------------------------------------------------------------ 
+int StackCtor_(Stack *stack, size_t elemSize, size_t capacity, callInfo info);
 
+//------------------------------------------------------------ 
+//! Destroys the stack, freeing all allocated dynamic memory 
+//! 
+//! @param[in]  stack   Pointer to stack
+//!
+//! @note In debug mode sets all bytes of data array to STK_DATA_POISON, size to STK_SIZE_POISON, sets data pointer to 13
+//------------------------------------------------------------ 
 void StackDtor(Stack *stack);
 
+//------------------------------------------------------------ 
+//! Pops an element from the stack
+//!
+//! @param[in]  stack   Pointer to stack
+//! @param[out] dest    Pointer to memory area where to copy the popped element
+//! @param[in]  err     Pointer to variable that will store the error code
+//------------------------------------------------------------ 
 void StackPop(Stack *stack, void *dest, int *err = nullptr);
 
+//------------------------------------------------------------ 
+//! Pushes an element onto the stack
+//!
+//! @param[in]  stack   Pointer to stack
+//! @param[in]  src     Pointer to memory area where the value to push is stored 
+//! @param[in]  err     Pointer to variable that will store the error code
+//------------------------------------------------------------ 
 void StackPush(Stack *stack, void *src, int *err = nullptr);
 
+//------------------------------------------------------------ 
+//! Dynamically resizes the given stack
+//!
+//! @param[in]  stack   Pointer to stack
+//! @param[in]  size    Desired new size
+//!
+//! @return 1 on success, 0 on failure
+//------------------------------------------------------------ 
 int StackResize(Stack *stack, size_t size);
 
 #define ASSERT_OK(STACK)                        \
@@ -104,13 +167,13 @@ do {                                            \
     }                                           \
 } while (0)
 
-#define StackCtor(stack, el_size, capacity)    \
+#define StackCtor(stack, elemSize, capacity)    \
 do {                                           \
     callInfo inf = {};                         \
     inf.funcName = __FUNCTION_NAME__;          \
     inf.file = __FILE__;                       \
     inf.line = __LINE__;                       \
-    StackCtor_(stack, el_size, capacity, inf); \
+    StackCtor_(stack, elemSize, capacity, inf); \
 } while (0)
 
 #define StackDump(stack, reason)      \

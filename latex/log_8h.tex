@@ -1,0 +1,81 @@
+\hypertarget{log_8h}{}\doxysection{include/log.h File Reference}
+\label{log_8h}\index{include/log.h@{include/log.h}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{log_8h_a7f061865ea5a4860073744aa102ce601}{Log\+Err}} \+: int \{ \mbox{\hyperlink{log_8h_a7f061865ea5a4860073744aa102ce601ad860a31e50fb6b9bfb7de498af6638a2}{LOG\+\_\+\+OPN\+\_\+\+FAIL}} = -\/1
+, \mbox{\hyperlink{log_8h_a7f061865ea5a4860073744aa102ce601a2fde3588f9f80e567b9f25bdd09e20ea}{LOG\+\_\+\+WRT\+\_\+\+FAIL}} = 0
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{log_8h_a00053e80663e6dccbe519cb549c5cf26}{init\+Log}} ()
+\item 
+int \mbox{\hyperlink{log_8h_a52cdc2554f9440eadc5454f99a2923ea}{write\+To\+Log}} (const char $\ast$format ...)
+\item 
+int \mbox{\hyperlink{log_8h_a578c082a639b42024e6e03e8ced94ad4}{close\+Log}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{log_8h_a7f061865ea5a4860073744aa102ce601}\label{log_8h_a7f061865ea5a4860073744aa102ce601}} 
+\index{log.h@{log.h}!LogErr@{LogErr}}
+\index{LogErr@{LogErr}!log.h@{log.h}}
+\doxysubsubsection{\texorpdfstring{LogErr}{LogErr}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{log_8h_a7f061865ea5a4860073744aa102ce601}{Log\+Err}} \+: int}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LOG\_OPN\_FAIL@{LOG\_OPN\_FAIL}!log.h@{log.h}}\index{log.h@{log.h}!LOG\_OPN\_FAIL@{LOG\_OPN\_FAIL}}}\mbox{\Hypertarget{log_8h_a7f061865ea5a4860073744aa102ce601ad860a31e50fb6b9bfb7de498af6638a2}\label{log_8h_a7f061865ea5a4860073744aa102ce601ad860a31e50fb6b9bfb7de498af6638a2}} 
+LOG\+\_\+\+OPN\+\_\+\+FAIL&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LOG\_WRT\_FAIL@{LOG\_WRT\_FAIL}!log.h@{log.h}}\index{log.h@{log.h}!LOG\_WRT\_FAIL@{LOG\_WRT\_FAIL}}}\mbox{\Hypertarget{log_8h_a7f061865ea5a4860073744aa102ce601a2fde3588f9f80e567b9f25bdd09e20ea}\label{log_8h_a7f061865ea5a4860073744aa102ce601a2fde3588f9f80e567b9f25bdd09e20ea}} 
+LOG\+\_\+\+WRT\+\_\+\+FAIL&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{log_8h_a578c082a639b42024e6e03e8ced94ad4}\label{log_8h_a578c082a639b42024e6e03e8ced94ad4}} 
+\index{log.h@{log.h}!closeLog@{closeLog}}
+\index{closeLog@{closeLog}!log.h@{log.h}}
+\doxysubsubsection{\texorpdfstring{closeLog()}{closeLog()}}
+{\footnotesize\ttfamily int close\+Log (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Closes the log file
+
+\begin{DoxyReturn}{Returns}
+1 on success, 0 on failure 
+\end{DoxyReturn}
+\mbox{\Hypertarget{log_8h_a00053e80663e6dccbe519cb549c5cf26}\label{log_8h_a00053e80663e6dccbe519cb549c5cf26}} 
+\index{log.h@{log.h}!initLog@{initLog}}
+\index{initLog@{initLog}!log.h@{log.h}}
+\doxysubsubsection{\texorpdfstring{initLog()}{initLog()}}
+{\footnotesize\ttfamily int init\+Log (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Opens the log file and saves the file handle
+
+\begin{DoxyReturn}{Returns}
+1 on success, LOG\+\_\+\+OPN\+\_\+\+FAIL on failure 
+\end{DoxyReturn}
+\mbox{\Hypertarget{log_8h_a52cdc2554f9440eadc5454f99a2923ea}\label{log_8h_a52cdc2554f9440eadc5454f99a2923ea}} 
+\index{log.h@{log.h}!writeToLog@{writeToLog}}
+\index{writeToLog@{writeToLog}!log.h@{log.h}}
+\doxysubsubsection{\texorpdfstring{writeToLog()}{writeToLog()}}
+{\footnotesize\ttfamily int write\+To\+Log (\begin{DoxyParamCaption}\item[{const char $\ast$}]{format ... }\end{DoxyParamCaption})}
+
+Writes a formatted string with parameters to the log file
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em format} & Formatted string with parameters \\
+\hline
+\mbox{\texttt{ in}}  & {\em ...} & List of parameters to substitute in the string\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 on success, LOG\+\_\+\+WRITE\+\_\+\+FAIL on write failure, LOG\+\_\+\+OPN\+\_\+\+FAIL on log open failure 
+\end{DoxyReturn}

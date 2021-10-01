@@ -1,0 +1,361 @@
+\hypertarget{stack_8h}{}\doxysection{include/stack.h File Reference}
+\label{stack_8h}\index{include/stack.h@{include/stack.h}}
+{\ttfamily \#include $<$sys/types.\+h$>$}\newline
+{\ttfamily \#include $<$limits.\+h$>$}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structmyStruct}{my\+Struct}}
+\begin{DoxyCompactList}\small\item\em User defined type for use in the stack. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structcallInfo}{call\+Info}}
+\begin{DoxyCompactList}\small\item\em Encapsulates info about function call for debug. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structStack}{Stack}}
+\begin{DoxyCompactList}\small\item\em Declares a stack data structure as a struct. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{stack_8h_a25e2d509981e06719691d7b1b4b25b12}{\+\_\+\+\_\+\+FUNCTION\+\_\+\+NAME\+\_\+\+\_\+}}~\+\_\+\+\_\+func\+\_\+\+\_\+
+\item 
+\#define \mbox{\hyperlink{stack_8h_ac80a3592e72fd96b772ee47a7d8e0d0a}{DEBUG\+\_\+\+MODE}}
+\item 
+\#define \mbox{\hyperlink{stack_8h_a6a93240375b480349a535c16ffe4c644}{ASSERT\+\_\+\+OK}}(STACK)
+\item 
+\#define \mbox{\hyperlink{stack_8h_a4fb6cc32b2e5aa37959ef005aecc0316}{Stack\+Ctor}}(stack,  elem\+Size,  capacity)
+\item 
+\#define \mbox{\hyperlink{stack_8h_ab1db91240193a084ca60ec19b337237c}{Stack\+Dump}}(stack,  reason)
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef \mbox{\hyperlink{structmyStruct}{my\+Struct}} \mbox{\hyperlink{stack_8h_a1e651c3ee0c1beff1aebd53973ed1ad6}{elem\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Typedef for universal interface. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{stack_8h_a6c641af4f5108f28b3af16ea1a1eebde}{Stk\+Error}} \+: int \{ \newline
+\mbox{\hyperlink{stack_8h_a6c641af4f5108f28b3af16ea1a1eebdea269937c44f5900b281d6321c4caac4b9}{STK\+\_\+\+NULL}} = 1
+, \mbox{\hyperlink{stack_8h_a6c641af4f5108f28b3af16ea1a1eebdea34fc85cc627098b08a78ec4be52c9262}{STK\+\_\+\+INV\+\_\+\+SIZE}} = 2
+, \mbox{\hyperlink{stack_8h_a6c641af4f5108f28b3af16ea1a1eebdea02a1eabf5cf57e164eff84af2504e642}{STK\+\_\+\+CAP\+\_\+\+OVERFL}} = 3
+, \mbox{\hyperlink{stack_8h_a6c641af4f5108f28b3af16ea1a1eebdeac96652c90b62db479f565a5ea2c0e4f5}{STK\+\_\+\+UNDERFL}} = 4
+, \newline
+\mbox{\hyperlink{stack_8h_a6c641af4f5108f28b3af16ea1a1eebdea70b8dffef378bfd11e07d91133d5f208}{STK\+\_\+\+NOMMRY}} = 5
+ \}
+\begin{DoxyCompactList}\small\item\em Encapsulates errors that can occur with the stack. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+char $\ast$ \mbox{\hyperlink{stack_8h_ac258f0fde27f7e5c0485497517a1ac16}{format\+Instance}} (const \mbox{\hyperlink{stack_8h_a1e651c3ee0c1beff1aebd53973ed1ad6}{elem\+\_\+t}} $\ast$instance)
+\item 
+int \mbox{\hyperlink{stack_8h_aa303d7ea38acea2b29fe6907e1a4605a}{Stack\+Error}} (\mbox{\hyperlink{structStack}{Stack}} $\ast$stack)
+\item 
+int \mbox{\hyperlink{stack_8h_aceabd4a4767b29cd82fb91f7592538a2}{write\+Err\+Code}} (int err)
+\item 
+int \mbox{\hyperlink{stack_8h_a520eb42f54c34742009160bd854f7b9b}{Stack\+Dump\+\_\+}} (\mbox{\hyperlink{structStack}{Stack}} $\ast$stack, const char $\ast$reason, \mbox{\hyperlink{structcallInfo}{call\+Info}} info, const char $\ast$stk\+Name)
+\item 
+int \mbox{\hyperlink{stack_8h_acaa4b30c616f979006371a1f58feda76}{Stack\+Ctor\+\_\+}} (\mbox{\hyperlink{structStack}{Stack}} $\ast$stack, size\+\_\+t elem\+Size, size\+\_\+t capacity, \mbox{\hyperlink{structcallInfo}{call\+Info}} info)
+\item 
+void \mbox{\hyperlink{stack_8h_a282766b4bc512d86d5aa62efead2fc27}{Stack\+Dtor}} (\mbox{\hyperlink{structStack}{Stack}} $\ast$stack)
+\item 
+void \mbox{\hyperlink{stack_8h_ac929759ec3f8d934f062955746e8c1eb}{Stack\+Pop}} (\mbox{\hyperlink{structStack}{Stack}} $\ast$stack, void $\ast$dest, int $\ast$err=nullptr)
+\item 
+void \mbox{\hyperlink{stack_8h_a33e6efdcf8c2623ce32ba4724c5f0b68}{Stack\+Push}} (\mbox{\hyperlink{structStack}{Stack}} $\ast$stack, void $\ast$src, int $\ast$err=nullptr)
+\item 
+int \mbox{\hyperlink{stack_8h_ab678ced17c93558a89d06ce2a5a58242}{Stack\+Resize}} (\mbox{\hyperlink{structStack}{Stack}} $\ast$stack, size\+\_\+t size)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const size\+\_\+t \mbox{\hyperlink{stack_8h_a7682d5bccdfeb4a923d778b73fe1832a}{DEFAULT\+\_\+\+STACK\+\_\+\+CAPACITY}} = 10
+\begin{DoxyCompactList}\small\item\em Default stack capacity. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{stack_8h_a25e2d509981e06719691d7b1b4b25b12}\label{stack_8h_a25e2d509981e06719691d7b1b4b25b12}} 
+\index{stack.h@{stack.h}!\_\_FUNCTION\_NAME\_\_@{\_\_FUNCTION\_NAME\_\_}}
+\index{\_\_FUNCTION\_NAME\_\_@{\_\_FUNCTION\_NAME\_\_}!stack.h@{stack.h}}
+\doxysubsubsection{\texorpdfstring{\_\_FUNCTION\_NAME\_\_}{\_\_FUNCTION\_NAME\_\_}}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+FUNCTION\+\_\+\+NAME\+\_\+\+\_\+~\+\_\+\+\_\+func\+\_\+\+\_\+}
+
+\mbox{\Hypertarget{stack_8h_a6a93240375b480349a535c16ffe4c644}\label{stack_8h_a6a93240375b480349a535c16ffe4c644}} 
+\index{stack.h@{stack.h}!ASSERT\_OK@{ASSERT\_OK}}
+\index{ASSERT\_OK@{ASSERT\_OK}!stack.h@{stack.h}}
+\doxysubsubsection{\texorpdfstring{ASSERT\_OK}{ASSERT\_OK}}
+{\footnotesize\ttfamily \#define ASSERT\+\_\+\+OK(\begin{DoxyParamCaption}\item[{}]{STACK }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordflow}{do} \{                                            \(\backslash\)}
+\DoxyCodeLine{    int ret = \mbox{\hyperlink{stack_8h_aa303d7ea38acea2b29fe6907e1a4605a}{StackError}}(STACK);                \(\backslash\)}
+\DoxyCodeLine{    if (ret != 0) \{                             \(\backslash\)}
+\DoxyCodeLine{        StackDump(STACK, \textcolor{stringliteral}{"{}ASSERT\_OK failed"{}});   \(\backslash\)}
+\DoxyCodeLine{        assert(!\textcolor{stringliteral}{"{}Invariant failure"{}});           \(\backslash\)}
+\DoxyCodeLine{    \}                                           \(\backslash\)}
+\DoxyCodeLine{\} \textcolor{keywordflow}{while} (0)}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{stack_8h_ac80a3592e72fd96b772ee47a7d8e0d0a}\label{stack_8h_ac80a3592e72fd96b772ee47a7d8e0d0a}} 
+\index{stack.h@{stack.h}!DEBUG\_MODE@{DEBUG\_MODE}}
+\index{DEBUG\_MODE@{DEBUG\_MODE}!stack.h@{stack.h}}
+\doxysubsubsection{\texorpdfstring{DEBUG\_MODE}{DEBUG\_MODE}}
+{\footnotesize\ttfamily \#define DEBUG\+\_\+\+MODE}
+
+\mbox{\Hypertarget{stack_8h_a4fb6cc32b2e5aa37959ef005aecc0316}\label{stack_8h_a4fb6cc32b2e5aa37959ef005aecc0316}} 
+\index{stack.h@{stack.h}!StackCtor@{StackCtor}}
+\index{StackCtor@{StackCtor}!stack.h@{stack.h}}
+\doxysubsubsection{\texorpdfstring{StackCtor}{StackCtor}}
+{\footnotesize\ttfamily \#define Stack\+Ctor(\begin{DoxyParamCaption}\item[{}]{stack,  }\item[{}]{elem\+Size,  }\item[{}]{capacity }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordflow}{do} \{                                           \(\backslash\)}
+\DoxyCodeLine{    callInfo inf = \{\};                         \(\backslash\)}
+\DoxyCodeLine{    inf.funcName = \mbox{\hyperlink{stack_8h_a25e2d509981e06719691d7b1b4b25b12}{\_\_FUNCTION\_NAME\_\_}};          \(\backslash\)}
+\DoxyCodeLine{    inf.file = \_\_FILE\_\_;                       \(\backslash\)}
+\DoxyCodeLine{    inf.line = \_\_LINE\_\_;                       \(\backslash\)}
+\DoxyCodeLine{    StackCtor\_(stack, elemSize, capacity, inf); \(\backslash\)}
+\DoxyCodeLine{\} \textcolor{keywordflow}{while} (0)}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{stack_8h_ab1db91240193a084ca60ec19b337237c}\label{stack_8h_ab1db91240193a084ca60ec19b337237c}} 
+\index{stack.h@{stack.h}!StackDump@{StackDump}}
+\index{StackDump@{StackDump}!stack.h@{stack.h}}
+\doxysubsubsection{\texorpdfstring{StackDump}{StackDump}}
+{\footnotesize\ttfamily \#define Stack\+Dump(\begin{DoxyParamCaption}\item[{}]{stack,  }\item[{}]{reason }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordflow}{do} \{                                           \(\backslash\)}
+\DoxyCodeLine{    callInfo inf = \{\};                         \(\backslash\)}
+\DoxyCodeLine{    inf.funcName = \mbox{\hyperlink{stack_8h_a25e2d509981e06719691d7b1b4b25b12}{\_\_FUNCTION\_NAME\_\_}};          \(\backslash\)}
+\DoxyCodeLine{    inf.file = \_\_FILE\_\_;                       \(\backslash\)}
+\DoxyCodeLine{    inf.line = \_\_LINE\_\_;                       \(\backslash\)}
+\DoxyCodeLine{    StackDump\_(stack, reason, inf, \#stack);   \(\backslash\)}
+\DoxyCodeLine{\} \textcolor{keywordflow}{while} (0)}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{stack_8h_a1e651c3ee0c1beff1aebd53973ed1ad6}\label{stack_8h_a1e651c3ee0c1beff1aebd53973ed1ad6}} 
+\index{stack.h@{stack.h}!elem\_t@{elem\_t}}
+\index{elem\_t@{elem\_t}!stack.h@{stack.h}}
+\doxysubsubsection{\texorpdfstring{elem\_t}{elem\_t}}
+{\footnotesize\ttfamily typedef \mbox{\hyperlink{structmyStruct}{my\+Struct}} \mbox{\hyperlink{stack_8h_a1e651c3ee0c1beff1aebd53973ed1ad6}{elem\+\_\+t}}}
+
+
+
+Typedef for universal interface. 
+
+
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{stack_8h_a6c641af4f5108f28b3af16ea1a1eebde}\label{stack_8h_a6c641af4f5108f28b3af16ea1a1eebde}} 
+\index{stack.h@{stack.h}!StkError@{StkError}}
+\index{StkError@{StkError}!stack.h@{stack.h}}
+\doxysubsubsection{\texorpdfstring{StkError}{StkError}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{stack_8h_a6c641af4f5108f28b3af16ea1a1eebde}{Stk\+Error}} \+: int}
+
+
+
+Encapsulates errors that can occur with the stack. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STK\_NULL@{STK\_NULL}!stack.h@{stack.h}}\index{stack.h@{stack.h}!STK\_NULL@{STK\_NULL}}}\mbox{\Hypertarget{stack_8h_a6c641af4f5108f28b3af16ea1a1eebdea269937c44f5900b281d6321c4caac4b9}\label{stack_8h_a6c641af4f5108f28b3af16ea1a1eebdea269937c44f5900b281d6321c4caac4b9}} 
+STK\+\_\+\+NULL&\mbox{\hyperlink{structStack}{Stack}} pointer is null \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STK\_INV\_SIZE@{STK\_INV\_SIZE}!stack.h@{stack.h}}\index{stack.h@{stack.h}!STK\_INV\_SIZE@{STK\_INV\_SIZE}}}\mbox{\Hypertarget{stack_8h_a6c641af4f5108f28b3af16ea1a1eebdea34fc85cc627098b08a78ec4be52c9262}\label{stack_8h_a6c641af4f5108f28b3af16ea1a1eebdea34fc85cc627098b08a78ec4be52c9262}} 
+STK\+\_\+\+INV\+\_\+\+SIZE&\mbox{\hyperlink{structStack}{Stack}} size has a value of STK\+\_\+\+SIZE\+\_\+\+POISON \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STK\_CAP\_OVERFL@{STK\_CAP\_OVERFL}!stack.h@{stack.h}}\index{stack.h@{stack.h}!STK\_CAP\_OVERFL@{STK\_CAP\_OVERFL}}}\mbox{\Hypertarget{stack_8h_a6c641af4f5108f28b3af16ea1a1eebdea02a1eabf5cf57e164eff84af2504e642}\label{stack_8h_a6c641af4f5108f28b3af16ea1a1eebdea02a1eabf5cf57e164eff84af2504e642}} 
+STK\+\_\+\+CAP\+\_\+\+OVERFL&\mbox{\hyperlink{structStack}{Stack}} size is more than stack capacity \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STK\_UNDERFL@{STK\_UNDERFL}!stack.h@{stack.h}}\index{stack.h@{stack.h}!STK\_UNDERFL@{STK\_UNDERFL}}}\mbox{\Hypertarget{stack_8h_a6c641af4f5108f28b3af16ea1a1eebdeac96652c90b62db479f565a5ea2c0e4f5}\label{stack_8h_a6c641af4f5108f28b3af16ea1a1eebdeac96652c90b62db479f565a5ea2c0e4f5}} 
+STK\+\_\+\+UNDERFL&Trying to pop from an empty stack \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STK\_NOMMRY@{STK\_NOMMRY}!stack.h@{stack.h}}\index{stack.h@{stack.h}!STK\_NOMMRY@{STK\_NOMMRY}}}\mbox{\Hypertarget{stack_8h_a6c641af4f5108f28b3af16ea1a1eebdea70b8dffef378bfd11e07d91133d5f208}\label{stack_8h_a6c641af4f5108f28b3af16ea1a1eebdea70b8dffef378bfd11e07d91133d5f208}} 
+STK\+\_\+\+NOMMRY&Memory allocation error \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{stack_8h_ac258f0fde27f7e5c0485497517a1ac16}\label{stack_8h_ac258f0fde27f7e5c0485497517a1ac16}} 
+\index{stack.h@{stack.h}!formatInstance@{formatInstance}}
+\index{formatInstance@{formatInstance}!stack.h@{stack.h}}
+\doxysubsubsection{\texorpdfstring{formatInstance()}{formatInstance()}}
+{\footnotesize\ttfamily char $\ast$ format\+Instance (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{stack_8h_a1e651c3ee0c1beff1aebd53973ed1ad6}{elem\+\_\+t}} $\ast$}]{instance }\end{DoxyParamCaption})}
+
+User defined function that formats their data type to a string for debug output
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em instance} & Pointer to user type instance to format\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+String version of the user type instance on success, nullptr on failure 
+\end{DoxyReturn}
+\mbox{\Hypertarget{stack_8h_acaa4b30c616f979006371a1f58feda76}\label{stack_8h_acaa4b30c616f979006371a1f58feda76}} 
+\index{stack.h@{stack.h}!StackCtor\_@{StackCtor\_}}
+\index{StackCtor\_@{StackCtor\_}!stack.h@{stack.h}}
+\doxysubsubsection{\texorpdfstring{StackCtor\_()}{StackCtor\_()}}
+{\footnotesize\ttfamily int Stack\+Ctor\+\_\+ (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structStack}{Stack}} $\ast$}]{stack,  }\item[{size\+\_\+t}]{elem\+Size,  }\item[{size\+\_\+t}]{capacity,  }\item[{\mbox{\hyperlink{structcallInfo}{call\+Info}}}]{info }\end{DoxyParamCaption})}
+
+Constructs the stack of given type with given capacity
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ out}}  & {\em stack} & Pointer to stack \\
+\hline
+\mbox{\texttt{ in}}  & {\em elem\+Size} & Size of the stored data type in bytes ~\newline
+ \\
+\hline
+\mbox{\texttt{ in}}  & {\em capacity} & Desired capacity of the stack \\
+\hline
+\mbox{\texttt{ in}}  & {\em info} & Information about the constructor function call ~\newline
+\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 on success, 0 on failure 
+\end{DoxyReturn}
+\mbox{\Hypertarget{stack_8h_a282766b4bc512d86d5aa62efead2fc27}\label{stack_8h_a282766b4bc512d86d5aa62efead2fc27}} 
+\index{stack.h@{stack.h}!StackDtor@{StackDtor}}
+\index{StackDtor@{StackDtor}!stack.h@{stack.h}}
+\doxysubsubsection{\texorpdfstring{StackDtor()}{StackDtor()}}
+{\footnotesize\ttfamily void Stack\+Dtor (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structStack}{Stack}} $\ast$}]{stack }\end{DoxyParamCaption})}
+
+Destroys the stack, freeing all allocated dynamic memory
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em stack} & Pointer to stack\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+In debug mode sets all bytes of data array to STK\+\_\+\+DATA\+\_\+\+POISON, size to STK\+\_\+\+SIZE\+\_\+\+POISON, sets data pointer to 13 
+\end{DoxyNote}
+\mbox{\Hypertarget{stack_8h_a520eb42f54c34742009160bd854f7b9b}\label{stack_8h_a520eb42f54c34742009160bd854f7b9b}} 
+\index{stack.h@{stack.h}!StackDump\_@{StackDump\_}}
+\index{StackDump\_@{StackDump\_}!stack.h@{stack.h}}
+\doxysubsubsection{\texorpdfstring{StackDump\_()}{StackDump\_()}}
+{\footnotesize\ttfamily int Stack\+Dump\+\_\+ (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structStack}{Stack}} $\ast$}]{stack,  }\item[{const char $\ast$}]{reason,  }\item[{\mbox{\hyperlink{structcallInfo}{call\+Info}}}]{info,  }\item[{const char $\ast$}]{stk\+Name }\end{DoxyParamCaption})}
+
+Prints all information about the stack to the log file
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em stack} & Pointer to the stack \\
+\hline
+\mbox{\texttt{ in}}  & {\em reason} & String with reason for stack dump \\
+\hline
+\mbox{\texttt{ in}}  & {\em info} & Struct with information about function call location \\
+\hline
+\mbox{\texttt{ in}}  & {\em stk\+Name} & String name of the stack\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 on success, 0 on failure 
+\end{DoxyReturn}
+\mbox{\Hypertarget{stack_8h_aa303d7ea38acea2b29fe6907e1a4605a}\label{stack_8h_aa303d7ea38acea2b29fe6907e1a4605a}} 
+\index{stack.h@{stack.h}!StackError@{StackError}}
+\index{StackError@{StackError}!stack.h@{stack.h}}
+\doxysubsubsection{\texorpdfstring{StackError()}{StackError()}}
+{\footnotesize\ttfamily int Stack\+Error (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structStack}{Stack}} $\ast$}]{stack }\end{DoxyParamCaption})}
+
+Checks if the given stack is valid
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em stack} & Pointer to the stack to check\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if the stack is valid, one of the values of the Stk\+Error otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{stack_8h_ac929759ec3f8d934f062955746e8c1eb}\label{stack_8h_ac929759ec3f8d934f062955746e8c1eb}} 
+\index{stack.h@{stack.h}!StackPop@{StackPop}}
+\index{StackPop@{StackPop}!stack.h@{stack.h}}
+\doxysubsubsection{\texorpdfstring{StackPop()}{StackPop()}}
+{\footnotesize\ttfamily void Stack\+Pop (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structStack}{Stack}} $\ast$}]{stack,  }\item[{void $\ast$}]{dest,  }\item[{int $\ast$}]{err = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+Pops an element from the stack
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em stack} & Pointer to stack \\
+\hline
+\mbox{\texttt{ out}}  & {\em dest} & Pointer to memory area where to copy the popped element \\
+\hline
+\mbox{\texttt{ in}}  & {\em err} & Pointer to variable that will store the error code \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{stack_8h_a33e6efdcf8c2623ce32ba4724c5f0b68}\label{stack_8h_a33e6efdcf8c2623ce32ba4724c5f0b68}} 
+\index{stack.h@{stack.h}!StackPush@{StackPush}}
+\index{StackPush@{StackPush}!stack.h@{stack.h}}
+\doxysubsubsection{\texorpdfstring{StackPush()}{StackPush()}}
+{\footnotesize\ttfamily void Stack\+Push (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structStack}{Stack}} $\ast$}]{stack,  }\item[{void $\ast$}]{src,  }\item[{int $\ast$}]{err = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+Pushes an element onto the stack
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em stack} & Pointer to stack \\
+\hline
+\mbox{\texttt{ in}}  & {\em src} & Pointer to memory area where the value to push is stored \\
+\hline
+\mbox{\texttt{ in}}  & {\em err} & Pointer to variable that will store the error code \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{stack_8h_ab678ced17c93558a89d06ce2a5a58242}\label{stack_8h_ab678ced17c93558a89d06ce2a5a58242}} 
+\index{stack.h@{stack.h}!StackResize@{StackResize}}
+\index{StackResize@{StackResize}!stack.h@{stack.h}}
+\doxysubsubsection{\texorpdfstring{StackResize()}{StackResize()}}
+{\footnotesize\ttfamily int Stack\+Resize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structStack}{Stack}} $\ast$}]{stack,  }\item[{size\+\_\+t}]{size }\end{DoxyParamCaption})}
+
+Dynamically resizes the given stack
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em stack} & Pointer to stack \\
+\hline
+\mbox{\texttt{ in}}  & {\em size} & Desired new size\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 on success, 0 on failure 
+\end{DoxyReturn}
+\mbox{\Hypertarget{stack_8h_aceabd4a4767b29cd82fb91f7592538a2}\label{stack_8h_aceabd4a4767b29cd82fb91f7592538a2}} 
+\index{stack.h@{stack.h}!writeErrCode@{writeErrCode}}
+\index{writeErrCode@{writeErrCode}!stack.h@{stack.h}}
+\doxysubsubsection{\texorpdfstring{writeErrCode()}{writeErrCode()}}
+{\footnotesize\ttfamily int write\+Err\+Code (\begin{DoxyParamCaption}\item[{int}]{err }\end{DoxyParamCaption})}
+
+Writes given error code in a string form to the log file
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em err} & Error code that corresponds to one of the values in Stk\+Error enum\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 on success, 0 on failure 
+\end{DoxyReturn}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{stack_8h_a7682d5bccdfeb4a923d778b73fe1832a}\label{stack_8h_a7682d5bccdfeb4a923d778b73fe1832a}} 
+\index{stack.h@{stack.h}!DEFAULT\_STACK\_CAPACITY@{DEFAULT\_STACK\_CAPACITY}}
+\index{DEFAULT\_STACK\_CAPACITY@{DEFAULT\_STACK\_CAPACITY}!stack.h@{stack.h}}
+\doxysubsubsection{\texorpdfstring{DEFAULT\_STACK\_CAPACITY}{DEFAULT\_STACK\_CAPACITY}}
+{\footnotesize\ttfamily const size\+\_\+t DEFAULT\+\_\+\+STACK\+\_\+\+CAPACITY = 10}
+
+
+
+Default stack capacity. 
+

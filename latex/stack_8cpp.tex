@@ -1,0 +1,197 @@
+\hypertarget{stack_8cpp}{}\doxysection{src/stack.cpp File Reference}
+\label{stack_8cpp}\index{src/stack.cpp@{src/stack.cpp}}
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$assert.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$errno.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$limits.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}../include/mymemcpy.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../include/stack.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../include/log.\+h\char`\"{}}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+char $\ast$ \mbox{\hyperlink{stack_8cpp_ac258f0fde27f7e5c0485497517a1ac16}{format\+Instance}} (const \mbox{\hyperlink{stack_8h_a1e651c3ee0c1beff1aebd53973ed1ad6}{elem\+\_\+t}} $\ast$instance)
+\item 
+int \mbox{\hyperlink{stack_8cpp_aa303d7ea38acea2b29fe6907e1a4605a}{Stack\+Error}} (\mbox{\hyperlink{structStack}{Stack}} $\ast$stack)
+\item 
+int \mbox{\hyperlink{stack_8cpp_aceabd4a4767b29cd82fb91f7592538a2}{write\+Err\+Code}} (int err)
+\item 
+int \mbox{\hyperlink{stack_8cpp_a520eb42f54c34742009160bd854f7b9b}{Stack\+Dump\+\_\+}} (\mbox{\hyperlink{structStack}{Stack}} $\ast$stack, const char $\ast$reason, \mbox{\hyperlink{structcallInfo}{call\+Info}} info, const char $\ast$stk\+Name)
+\item 
+int \mbox{\hyperlink{stack_8cpp_acaa4b30c616f979006371a1f58feda76}{Stack\+Ctor\+\_\+}} (\mbox{\hyperlink{structStack}{Stack}} $\ast$stack, size\+\_\+t elem\+Size, size\+\_\+t capacity, \mbox{\hyperlink{structcallInfo}{call\+Info}} info)
+\item 
+int \mbox{\hyperlink{stack_8cpp_ab678ced17c93558a89d06ce2a5a58242}{Stack\+Resize}} (\mbox{\hyperlink{structStack}{Stack}} $\ast$stack, size\+\_\+t size)
+\item 
+void \mbox{\hyperlink{stack_8cpp_a282766b4bc512d86d5aa62efead2fc27}{Stack\+Dtor}} (\mbox{\hyperlink{structStack}{Stack}} $\ast$stack)
+\item 
+void \mbox{\hyperlink{stack_8cpp_a1f7449f58b080af56ab71f1d905fb02e}{Stack\+Push}} (\mbox{\hyperlink{structStack}{Stack}} $\ast$stack, void $\ast$src, int $\ast$err)
+\item 
+void \mbox{\hyperlink{stack_8cpp_a8b1db7026bbf2010a98312a78c214aca}{Stack\+Pop}} (\mbox{\hyperlink{structStack}{Stack}} $\ast$stack, void $\ast$dest, int $\ast$err)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{stack_8cpp_ac258f0fde27f7e5c0485497517a1ac16}\label{stack_8cpp_ac258f0fde27f7e5c0485497517a1ac16}} 
+\index{stack.cpp@{stack.cpp}!formatInstance@{formatInstance}}
+\index{formatInstance@{formatInstance}!stack.cpp@{stack.cpp}}
+\doxysubsubsection{\texorpdfstring{formatInstance()}{formatInstance()}}
+{\footnotesize\ttfamily char $\ast$ format\+Instance (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{stack_8h_a1e651c3ee0c1beff1aebd53973ed1ad6}{elem\+\_\+t}} $\ast$}]{instance }\end{DoxyParamCaption})}
+
+User defined function that formats their data type to a string for debug output
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em instance} & Pointer to user type instance to format\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+String version of the user type instance on success, nullptr on failure 
+\end{DoxyReturn}
+\mbox{\Hypertarget{stack_8cpp_acaa4b30c616f979006371a1f58feda76}\label{stack_8cpp_acaa4b30c616f979006371a1f58feda76}} 
+\index{stack.cpp@{stack.cpp}!StackCtor\_@{StackCtor\_}}
+\index{StackCtor\_@{StackCtor\_}!stack.cpp@{stack.cpp}}
+\doxysubsubsection{\texorpdfstring{StackCtor\_()}{StackCtor\_()}}
+{\footnotesize\ttfamily int Stack\+Ctor\+\_\+ (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structStack}{Stack}} $\ast$}]{stack,  }\item[{size\+\_\+t}]{elem\+Size,  }\item[{size\+\_\+t}]{capacity,  }\item[{\mbox{\hyperlink{structcallInfo}{call\+Info}}}]{info }\end{DoxyParamCaption})}
+
+Constructs the stack of given type with given capacity
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ out}}  & {\em stack} & Pointer to stack \\
+\hline
+\mbox{\texttt{ in}}  & {\em elem\+Size} & Size of the stored data type in bytes ~\newline
+ \\
+\hline
+\mbox{\texttt{ in}}  & {\em capacity} & Desired capacity of the stack \\
+\hline
+\mbox{\texttt{ in}}  & {\em info} & Information about the constructor function call ~\newline
+\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 on success, 0 on failure 
+\end{DoxyReturn}
+\mbox{\Hypertarget{stack_8cpp_a282766b4bc512d86d5aa62efead2fc27}\label{stack_8cpp_a282766b4bc512d86d5aa62efead2fc27}} 
+\index{stack.cpp@{stack.cpp}!StackDtor@{StackDtor}}
+\index{StackDtor@{StackDtor}!stack.cpp@{stack.cpp}}
+\doxysubsubsection{\texorpdfstring{StackDtor()}{StackDtor()}}
+{\footnotesize\ttfamily void Stack\+Dtor (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structStack}{Stack}} $\ast$}]{stack }\end{DoxyParamCaption})}
+
+Destroys the stack, freeing all allocated dynamic memory
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em stack} & Pointer to stack\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+In debug mode sets all bytes of data array to STK\+\_\+\+DATA\+\_\+\+POISON, size to STK\+\_\+\+SIZE\+\_\+\+POISON, sets data pointer to 13 
+\end{DoxyNote}
+\mbox{\Hypertarget{stack_8cpp_a520eb42f54c34742009160bd854f7b9b}\label{stack_8cpp_a520eb42f54c34742009160bd854f7b9b}} 
+\index{stack.cpp@{stack.cpp}!StackDump\_@{StackDump\_}}
+\index{StackDump\_@{StackDump\_}!stack.cpp@{stack.cpp}}
+\doxysubsubsection{\texorpdfstring{StackDump\_()}{StackDump\_()}}
+{\footnotesize\ttfamily int Stack\+Dump\+\_\+ (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structStack}{Stack}} $\ast$}]{stack,  }\item[{const char $\ast$}]{reason,  }\item[{\mbox{\hyperlink{structcallInfo}{call\+Info}}}]{info,  }\item[{const char $\ast$}]{stk\+Name }\end{DoxyParamCaption})}
+
+Prints all information about the stack to the log file
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em stack} & Pointer to the stack \\
+\hline
+\mbox{\texttt{ in}}  & {\em reason} & String with reason for stack dump \\
+\hline
+\mbox{\texttt{ in}}  & {\em info} & Struct with information about function call location \\
+\hline
+\mbox{\texttt{ in}}  & {\em stk\+Name} & String name of the stack\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 on success, 0 on failure 
+\end{DoxyReturn}
+\mbox{\Hypertarget{stack_8cpp_aa303d7ea38acea2b29fe6907e1a4605a}\label{stack_8cpp_aa303d7ea38acea2b29fe6907e1a4605a}} 
+\index{stack.cpp@{stack.cpp}!StackError@{StackError}}
+\index{StackError@{StackError}!stack.cpp@{stack.cpp}}
+\doxysubsubsection{\texorpdfstring{StackError()}{StackError()}}
+{\footnotesize\ttfamily int Stack\+Error (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structStack}{Stack}} $\ast$}]{stack }\end{DoxyParamCaption})}
+
+Checks if the given stack is valid
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em stack} & Pointer to the stack to check\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if the stack is valid, one of the values of the Stk\+Error otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{stack_8cpp_a8b1db7026bbf2010a98312a78c214aca}\label{stack_8cpp_a8b1db7026bbf2010a98312a78c214aca}} 
+\index{stack.cpp@{stack.cpp}!StackPop@{StackPop}}
+\index{StackPop@{StackPop}!stack.cpp@{stack.cpp}}
+\doxysubsubsection{\texorpdfstring{StackPop()}{StackPop()}}
+{\footnotesize\ttfamily void Stack\+Pop (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structStack}{Stack}} $\ast$}]{stack,  }\item[{void $\ast$}]{dest,  }\item[{int $\ast$}]{err = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+Pops an element from the stack
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em stack} & Pointer to stack \\
+\hline
+\mbox{\texttt{ out}}  & {\em dest} & Pointer to memory area where to copy the popped element \\
+\hline
+\mbox{\texttt{ in}}  & {\em err} & Pointer to variable that will store the error code \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{stack_8cpp_a1f7449f58b080af56ab71f1d905fb02e}\label{stack_8cpp_a1f7449f58b080af56ab71f1d905fb02e}} 
+\index{stack.cpp@{stack.cpp}!StackPush@{StackPush}}
+\index{StackPush@{StackPush}!stack.cpp@{stack.cpp}}
+\doxysubsubsection{\texorpdfstring{StackPush()}{StackPush()}}
+{\footnotesize\ttfamily void Stack\+Push (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structStack}{Stack}} $\ast$}]{stack,  }\item[{void $\ast$}]{src,  }\item[{int $\ast$}]{err = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+Pushes an element onto the stack
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em stack} & Pointer to stack \\
+\hline
+\mbox{\texttt{ in}}  & {\em src} & Pointer to memory area where the value to push is stored \\
+\hline
+\mbox{\texttt{ in}}  & {\em err} & Pointer to variable that will store the error code \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{stack_8cpp_ab678ced17c93558a89d06ce2a5a58242}\label{stack_8cpp_ab678ced17c93558a89d06ce2a5a58242}} 
+\index{stack.cpp@{stack.cpp}!StackResize@{StackResize}}
+\index{StackResize@{StackResize}!stack.cpp@{stack.cpp}}
+\doxysubsubsection{\texorpdfstring{StackResize()}{StackResize()}}
+{\footnotesize\ttfamily int Stack\+Resize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structStack}{Stack}} $\ast$}]{stack,  }\item[{size\+\_\+t}]{size }\end{DoxyParamCaption})}
+
+Dynamically resizes the given stack
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em stack} & Pointer to stack \\
+\hline
+\mbox{\texttt{ in}}  & {\em size} & Desired new size\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 on success, 0 on failure 
+\end{DoxyReturn}
+\mbox{\Hypertarget{stack_8cpp_aceabd4a4767b29cd82fb91f7592538a2}\label{stack_8cpp_aceabd4a4767b29cd82fb91f7592538a2}} 
+\index{stack.cpp@{stack.cpp}!writeErrCode@{writeErrCode}}
+\index{writeErrCode@{writeErrCode}!stack.cpp@{stack.cpp}}
+\doxysubsubsection{\texorpdfstring{writeErrCode()}{writeErrCode()}}
+{\footnotesize\ttfamily int write\+Err\+Code (\begin{DoxyParamCaption}\item[{int}]{err }\end{DoxyParamCaption})}
+
+Writes given error code in a string form to the log file
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em err} & Error code that corresponds to one of the values in Stk\+Error enum\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 on success, 0 on failure 
+\end{DoxyReturn}

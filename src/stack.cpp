@@ -116,16 +116,16 @@ int StackDump_(Stack *stack, const char *reason, callInfo info, const char *stkN
 }
 #endif
 
-int StackCtor_(Stack *stack, size_t el_size, size_t capacity, callInfo info) {
+int StackCtor_(Stack *stack, size_t elemSize, size_t capacity, callInfo info) {
     if (capacity != 0) {
-        stack->data = calloc(capacity, el_size);
+        stack->data = calloc(capacity, elemSize);
         if (stack->data == nullptr) {
             printf("There was an error allocating memory for the stack : %s\n", strerror(errno));
             return STK_NOMMRY;
         }
     }
     stack->size = 0;
-    stack->elemSize = el_size;
+    stack->elemSize = elemSize;
     stack->capacity = capacity;
 
 #ifdef DEBUG_MODE
@@ -163,13 +163,15 @@ void StackDtor(Stack *stack) {
     ASSERT_OK(stack);
 #endif
 
-    memset(stack->data, STK_DATA_POISON, stack->capacity * stack->elemSize);
 #ifdef DEBUG_MODE
+    memset(stack->data, STK_DATA_POISON, stack->capacity * stack->elemSize);
     StackDump(stack, "dtor");
-#endif
     stack->size = STK_SIZE_POISON;
+#endif
     free(stack->data);
+#ifdef DEBUG_MODE
     stack->data = (int *)13;
+#endif
 }
 
 void StackPush(Stack *stack, void *src, int *err) {

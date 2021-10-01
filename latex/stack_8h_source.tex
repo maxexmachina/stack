@@ -1,0 +1,131 @@
+\hypertarget{stack_8h_source}{}\doxysection{stack.\+h}
+\label{stack_8h_source}\index{include/stack.h@{include/stack.h}}
+\mbox{\hyperlink{stack_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef STACK\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define STACK\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <sys/types.h>}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <limits.h>}}
+\DoxyCodeLine{6 }
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#ifndef \_\_FUNCTION\_NAME\_\_}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{    \#ifdef WIN32   }\textcolor{comment}{//WINDOWS}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{        \#define \_\_FUNCTION\_NAME\_\_   \_\_FUNCTION\_\_  }}
+\DoxyCodeLine{10 \textcolor{preprocessor}{    \#else          }\textcolor{comment}{//*NIX}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{        \#define \_\_FUNCTION\_NAME\_\_   \_\_func\_\_ }}
+\DoxyCodeLine{12 \textcolor{preprocessor}{    \#endif}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#define DEBUG\_MODE}}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ User type -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{20 \textcolor{keyword}{struct }\mbox{\hyperlink{structmyStruct}{myStruct}} \{}
+\DoxyCodeLine{21     \textcolor{keywordtype}{long} \textcolor{keywordtype}{long} \mbox{\hyperlink{structmyStruct_aa3335c29f1263405af6a6d583393fa40}{a}};}
+\DoxyCodeLine{22     \textcolor{keywordtype}{long} \textcolor{keywordtype}{long} \mbox{\hyperlink{structmyStruct_aee60425b1a97db77fe49da4b1dbaa99c}{b}};}
+\DoxyCodeLine{23 \};}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{26 \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{char} *typeName = \textcolor{stringliteral}{"{}myStruct"{}};}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{29 \textcolor{keyword}{typedef} \mbox{\hyperlink{structmyStruct}{myStruct}} \mbox{\hyperlink{stack_8h_a1e651c3ee0c1beff1aebd53973ed1ad6}{elem\_t}};}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{31 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ }}
+\DoxyCodeLine{37 \textcolor{comment}{}\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ }}
+\DoxyCodeLine{38 \textcolor{keywordtype}{char} *\mbox{\hyperlink{stack_8h_ac258f0fde27f7e5c0485497517a1ac16}{formatInstance}}(\textcolor{keyword}{const} \mbox{\hyperlink{structmyStruct}{elem\_t}} *instance);}
+\DoxyCodeLine{39 }
+\DoxyCodeLine{40 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ }}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{43 \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{int} STK\_DATA\_POISON = 0x0F;}
+\DoxyCodeLine{45 \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} STK\_SIZE\_POISON = UINT\_MAX; }
+\DoxyCodeLine{46 }
+\DoxyCodeLine{48 \textcolor{keyword}{enum} \mbox{\hyperlink{stack_8h_a6c641af4f5108f28b3af16ea1a1eebde}{StkError}} : \textcolor{keywordtype}{int} \{}
+\DoxyCodeLine{49     \mbox{\hyperlink{stack_8h_a6c641af4f5108f28b3af16ea1a1eebdea269937c44f5900b281d6321c4caac4b9}{STK\_NULL}} = 1, }
+\DoxyCodeLine{50     \mbox{\hyperlink{stack_8h_a6c641af4f5108f28b3af16ea1a1eebdea34fc85cc627098b08a78ec4be52c9262}{STK\_INV\_SIZE}} = 2, }
+\DoxyCodeLine{51     \mbox{\hyperlink{stack_8h_a6c641af4f5108f28b3af16ea1a1eebdea02a1eabf5cf57e164eff84af2504e642}{STK\_CAP\_OVERFL}} = 3, }
+\DoxyCodeLine{52     \mbox{\hyperlink{stack_8h_a6c641af4f5108f28b3af16ea1a1eebdeac96652c90b62db479f565a5ea2c0e4f5}{STK\_UNDERFL}} = 4, }
+\DoxyCodeLine{53     \mbox{\hyperlink{stack_8h_a6c641af4f5108f28b3af16ea1a1eebdea70b8dffef378bfd11e07d91133d5f208}{STK\_NOMMRY}} = 5, }
+\DoxyCodeLine{54 \};}
+\DoxyCodeLine{55 }
+\DoxyCodeLine{57 \textcolor{keyword}{struct }\mbox{\hyperlink{structcallInfo}{callInfo}} \{}
+\DoxyCodeLine{58     \textcolor{keyword}{const} \textcolor{keywordtype}{char} *\mbox{\hyperlink{structcallInfo_ad203a4df48aa5ec7f60dd234a20d3346}{funcName}}; }
+\DoxyCodeLine{59     \textcolor{keyword}{const} \textcolor{keywordtype}{char} *\mbox{\hyperlink{structcallInfo_a25ca0b94ea2d104559bdc65c70c2f89f}{file}}; }
+\DoxyCodeLine{60     \textcolor{keywordtype}{int} \mbox{\hyperlink{structcallInfo_a2f3dadfdede08575a58495633f6a235f}{line}}; }
+\DoxyCodeLine{61 \};}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{64 \textcolor{keyword}{struct }\mbox{\hyperlink{structStack}{Stack}} \{}
+\DoxyCodeLine{65     \textcolor{keywordtype}{void} *\mbox{\hyperlink{structStack_ac6da0059516e42463ddacb5f859ec06c}{data}}; }
+\DoxyCodeLine{66     \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{structStack_aa996b7e0073208dacfcbff9c633daec0}{elemSize}}; }
+\DoxyCodeLine{67     \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{structStack_a3a469595caaaf49bbce059efabbe07b5}{size}}; }
+\DoxyCodeLine{68     \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{structStack_afb6d4ad9d2904c20d50102d310c963e0}{capacity}}; }
+\DoxyCodeLine{70 \textcolor{preprocessor}{\#ifdef DEBUG\_MODE}}
+\DoxyCodeLine{71     \textcolor{keyword}{const} \textcolor{keywordtype}{char} *\mbox{\hyperlink{structStack_a765d21bea881872543dfbd55e702210d}{typeName}}; }
+\DoxyCodeLine{73     \textcolor{keyword}{const} \textcolor{keywordtype}{char} *\mbox{\hyperlink{structStack_ace9d125940ec93ff78583875dfeb563f}{ctorCallFuncName}}; }
+\DoxyCodeLine{74     \textcolor{keyword}{const} \textcolor{keywordtype}{char} *\mbox{\hyperlink{structStack_a8907636dc2f0bb22e84aea5a0c7449e9}{ctorCallFile}}; }
+\DoxyCodeLine{75     \textcolor{keywordtype}{int} \mbox{\hyperlink{structStack_ad91d76b7a39acafa1ddef12cdd01574d}{ctorCallLine}}; }
+\DoxyCodeLine{76 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{77 \};}
+\DoxyCodeLine{78 }
+\DoxyCodeLine{80 \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{stack_8h_a7682d5bccdfeb4a923d778b73fe1832a}{DEFAULT\_STACK\_CAPACITY}} = 10;}
+\DoxyCodeLine{81 }
+\DoxyCodeLine{82 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ }}
+\DoxyCodeLine{88 \textcolor{comment}{}\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ }}
+\DoxyCodeLine{89 \textcolor{keywordtype}{int} \mbox{\hyperlink{stack_8h_aa303d7ea38acea2b29fe6907e1a4605a}{StackError}}(\mbox{\hyperlink{structStack}{Stack}} *stack);}
+\DoxyCodeLine{90 }
+\DoxyCodeLine{91 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ }}
+\DoxyCodeLine{97 \textcolor{comment}{}\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ }}
+\DoxyCodeLine{98 \textcolor{keywordtype}{int} \mbox{\hyperlink{stack_8h_aceabd4a4767b29cd82fb91f7592538a2}{writeErrCode}}(\textcolor{keywordtype}{int} err);}
+\DoxyCodeLine{99 }
+\DoxyCodeLine{100 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ }}
+\DoxyCodeLine{109 \textcolor{comment}{}\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ }}
+\DoxyCodeLine{110 \textcolor{keywordtype}{int} \mbox{\hyperlink{stack_8h_a520eb42f54c34742009160bd854f7b9b}{StackDump\_}}(\mbox{\hyperlink{structStack}{Stack}} *stack, \textcolor{keyword}{const} \textcolor{keywordtype}{char} *reason, \mbox{\hyperlink{structcallInfo}{callInfo}} info, \textcolor{keyword}{const} \textcolor{keywordtype}{char} *stkName);}
+\DoxyCodeLine{111 }
+\DoxyCodeLine{112 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ }}
+\DoxyCodeLine{121 \textcolor{comment}{}\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ }}
+\DoxyCodeLine{122 \textcolor{keywordtype}{int} \mbox{\hyperlink{stack_8h_acaa4b30c616f979006371a1f58feda76}{StackCtor\_}}(\mbox{\hyperlink{structStack}{Stack}} *stack, \textcolor{keywordtype}{size\_t} elemSize, \textcolor{keywordtype}{size\_t} capacity, \mbox{\hyperlink{structcallInfo}{callInfo}} info);}
+\DoxyCodeLine{123 }
+\DoxyCodeLine{124 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ }}
+\DoxyCodeLine{130 \textcolor{comment}{}\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ }}
+\DoxyCodeLine{131 \textcolor{keywordtype}{void} \mbox{\hyperlink{stack_8h_a282766b4bc512d86d5aa62efead2fc27}{StackDtor}}(\mbox{\hyperlink{structStack}{Stack}} *stack);}
+\DoxyCodeLine{132 }
+\DoxyCodeLine{133 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ }}
+\DoxyCodeLine{139 \textcolor{comment}{}\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ }}
+\DoxyCodeLine{140 \textcolor{keywordtype}{void} \mbox{\hyperlink{stack_8h_ac929759ec3f8d934f062955746e8c1eb}{StackPop}}(\mbox{\hyperlink{structStack}{Stack}} *stack, \textcolor{keywordtype}{void} *dest, \textcolor{keywordtype}{int} *err = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{141 }
+\DoxyCodeLine{142 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ }}
+\DoxyCodeLine{148 \textcolor{comment}{}\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ }}
+\DoxyCodeLine{149 \textcolor{keywordtype}{void} \mbox{\hyperlink{stack_8h_a33e6efdcf8c2623ce32ba4724c5f0b68}{StackPush}}(\mbox{\hyperlink{structStack}{Stack}} *stack, \textcolor{keywordtype}{void} *src, \textcolor{keywordtype}{int} *err = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{150 }
+\DoxyCodeLine{151 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ }}
+\DoxyCodeLine{158 \textcolor{comment}{}\textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ }}
+\DoxyCodeLine{159 \textcolor{keywordtype}{int} \mbox{\hyperlink{stack_8h_ab678ced17c93558a89d06ce2a5a58242}{StackResize}}(\mbox{\hyperlink{structStack}{Stack}} *stack, \textcolor{keywordtype}{size\_t} size);}
+\DoxyCodeLine{160 }
+\DoxyCodeLine{161 \textcolor{preprocessor}{\#define ASSERT\_OK(STACK)                        \(\backslash\)}}
+\DoxyCodeLine{162 \textcolor{preprocessor}{do \{                                            \(\backslash\)}}
+\DoxyCodeLine{163 \textcolor{preprocessor}{    int ret = StackError(STACK);                \(\backslash\)}}
+\DoxyCodeLine{164 \textcolor{preprocessor}{    if (ret != 0) \{                             \(\backslash\)}}
+\DoxyCodeLine{165 \textcolor{preprocessor}{        StackDump(STACK, "{}ASSERT\_OK failed"{}});   \(\backslash\)}
+\DoxyCodeLine{166         assert(!"{}Invariant failure"{});           \(\backslash\)}
+\DoxyCodeLine{167     \}                                           \(\backslash\)}
+\DoxyCodeLine{168 \} while (0)}
+\DoxyCodeLine{169 }
+\DoxyCodeLine{170 \textcolor{preprocessor}{\#define StackCtor(stack, elemSize, capacity)    \(\backslash\)}}
+\DoxyCodeLine{171 \textcolor{preprocessor}{do \{                                           \(\backslash\)}}
+\DoxyCodeLine{172 \textcolor{preprocessor}{    callInfo inf = \{\};                         \(\backslash\)}}
+\DoxyCodeLine{173 \textcolor{preprocessor}{    inf.funcName = \_\_FUNCTION\_NAME\_\_;          \(\backslash\)}}
+\DoxyCodeLine{174 \textcolor{preprocessor}{    inf.file = \_\_FILE\_\_;                       \(\backslash\)}}
+\DoxyCodeLine{175 \textcolor{preprocessor}{    inf.line = \_\_LINE\_\_;                       \(\backslash\)}}
+\DoxyCodeLine{176 \textcolor{preprocessor}{    StackCtor\_(stack, elemSize, capacity, inf); \(\backslash\)}}
+\DoxyCodeLine{177 \textcolor{preprocessor}{\} while (0)}}
+\DoxyCodeLine{178 }
+\DoxyCodeLine{179 \textcolor{preprocessor}{\#define StackDump(stack, reason)      \(\backslash\)}}
+\DoxyCodeLine{180 \textcolor{preprocessor}{do \{                                           \(\backslash\)}}
+\DoxyCodeLine{181 \textcolor{preprocessor}{    callInfo inf = \{\};                         \(\backslash\)}}
+\DoxyCodeLine{182 \textcolor{preprocessor}{    inf.funcName = \_\_FUNCTION\_NAME\_\_;          \(\backslash\)}}
+\DoxyCodeLine{183 \textcolor{preprocessor}{    inf.file = \_\_FILE\_\_;                       \(\backslash\)}}
+\DoxyCodeLine{184 \textcolor{preprocessor}{    inf.line = \_\_LINE\_\_;                       \(\backslash\)}}
+\DoxyCodeLine{185 \textcolor{preprocessor}{    StackDump\_(stack, reason, inf, \#stack);   \(\backslash\)}}
+\DoxyCodeLine{186 \textcolor{preprocessor}{\} while (0)}}
+\DoxyCodeLine{187 }
+\DoxyCodeLine{188 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}
