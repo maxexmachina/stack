@@ -31,6 +31,9 @@ int StackError(Stack *stack) {
     if (stack->size > stack->capacity) {
         return STK_CAP_OVERFL;
     }
+    if (stack->size == STK_SIZE_POISON) {
+        return STK_INV_SIZE;
+    }
     return 0;
 }
 
@@ -40,8 +43,8 @@ int writeErrCode(int err) {
         case STK_NULL:
             res = writeToLog("STK_NULL ");
             break;
-        case STK_NEG_CAP:
-            res = writeToLog("STK_NEG_CAP ");
+        case STK_INV_SIZE:
+            res = writeToLog("STK_INV_SIZE ");
             break;
         case STK_CAP_OVERFL:
             res = writeToLog("STK_CAP_OVERFL ");
@@ -69,7 +72,7 @@ int StackDump_(Stack *stack, const char *reason, callInfo info, const char *stkN
     dumpResult *= writeToLog("%s at %s() at %s (%d)\n"
                              "{\n"
                              "Dump reason : %s\n",
-                             stkName, stack->funcName, stack->file, stack->line, reason);
+                             stkName, stack->ctorCallFuncName, stack->ctorCallFile, stack->ctorCallLine, reason);
 
     if (!stack) {
         dumpResult *= writeToLog("stack : nullptr\n");
@@ -91,7 +94,7 @@ int StackDump_(Stack *stack, const char *reason, callInfo info, const char *stkN
                 } else {
                     char curChar = *(char *)((char *)stack->data + i * stack->elemSize);
                     dumpResult *= writeToLog("[%zu] = %x ", i, curChar);
-                    if (curChar == STK_POISON) {
+                    if (curChar == STK_DATA_POISON) {
                         dumpResult *= writeToLog("(POISON)");
                     }
                     dumpResult *= writeToLog("\n");
@@ -126,9 +129,9 @@ int StackCtor_(Stack *stack, size_t el_size, size_t capacity, callInfo info) {
     stack->capacity = capacity;
 
 #ifdef DEBUG_MODE
-    stack->funcName = info.funcName;
-    stack->file = info.file;
-    stack->line = info.line; 
+    stack->ctorCallFuncName = info.funcName;
+    stack->ctorCallFile = info.file;
+    stack->ctorCallLine = info.line; 
 
     ASSERT_OK(stack);
 #endif
