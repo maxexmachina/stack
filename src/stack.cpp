@@ -84,6 +84,7 @@ int writeErrCode(int err) {
     return 1;
 }
 
+#ifdef DEBUG_MODE
 int StackDump_(Stack *stack, const char *reason, callInfo info, const char *stkName) {
     int errCode = StackError(stack);
     writeToLog("Stack<%s>[%p] called from %s() at %s (%d) ", 
@@ -103,8 +104,8 @@ int StackDump_(Stack *stack, const char *reason, callInfo info, const char *stkN
     if (!stack) {
         writeToLog("stack : nullptr\n");
     } else {
-        writeToLog("size = %zu\ncapacity = %zu\ndata[%p]:\n"
-                   "{\n", stack->size, stack->capacity, (void *)stack->data);
+        writeToLog("size = %zu\ncapacity = %zu\nelement size = %zu\ndata[%p]:\n"
+                   "{\n", stack->size, stack->capacity, stack->elemSize, (void *)stack->data);
 
         if (!stack->data) {
             writeToLog("stack->data : nullptr\n");
@@ -118,7 +119,12 @@ int StackDump_(Stack *stack, const char *reason, callInfo info, const char *stkN
                         free(format);
                     }
                 } else {
-                    writeToLog("[%zu] = %d\n", i, *(int *)((char *)stack->data + i * stack->elemSize));
+                    char curChar = *(char *)((char *)stack->data + i * stack->elemSize);
+                    writeToLog("[%zu] = %x ", i, curChar);
+                    if (curChar == STK_POISON) {
+                        writeToLog("(POISON)");
+                    }
+                    writeToLog("\n");
                 }
             }
         }
@@ -131,6 +137,7 @@ int StackDump_(Stack *stack, const char *reason, callInfo info, const char *stkN
     }
     return 1;
 }
+#endif
 
 int StackCtor_(Stack *stack, size_t el_size, size_t capacity, callInfo info) {
     if (capacity != 0) {
@@ -179,7 +186,10 @@ void StackDtor(Stack *stack) {
     ASSERT_OK(stack);
 #endif
 
-    memset(stack->data, 0xF0, stack->capacity * stack->elemSize);
+    memset(stack->data, STK_POISON, stack->capacity * stack->elemSize);
+#ifdef DEBUG_MODE
+    StackDump(stack, "dtor");
+#endif
     stack->size = UINT_MAX;
     free(stack->data);
     stack->data = (int *)13;

@@ -28,6 +28,8 @@ char *formatInstance(const elem_t *instance);
 
 //------------------------------------------
 
+static const int STK_POISON = 0x0F;
+
 enum StkError : int {
     STK_NULL = 1,
     STK_NEG_CAP = 2,
