@@ -12,7 +12,7 @@
     #endif
 #endif
 
-#define DEBUG_MODE
+#define DEBUG_MODE 1
 
 //------------------ User type -------------
 
@@ -21,7 +21,7 @@ struct myStruct {
     long long a;
     long long b;
 };
-
+//#define name #name
 //! String constant for name of the user type for debug output
 static const char *typeName = "myStruct";
 
@@ -38,6 +38,13 @@ typedef myStruct elem_t;
 char *formatInstance(const elem_t *instance);
 
 //------------------------------------------------------------ 
+//! User defined function that returns a poisoned instance of their type for debug
+//!
+//! @return A poisoned instance of the user type for debug
+//------------------------------------------------------------ 
+elem_t getPoisonedInstance();
+
+//------------------------------------------------------------ 
 
 //! Constant used by stack destructor to designate bytes it has already freed
 static const int STK_DATA_POISON = 0x0F;
@@ -46,6 +53,7 @@ static const size_t STK_SIZE_POISON = UINT_MAX;
 
 //! Encapsulates errors that can occur with the stack
 enum StkError : int {
+    STK_NO_ERR = 0, /**< No error */
     STK_NULL = 1, /**< Stack pointer is null */
     STK_INV_SIZE = 2, /**< Stack size has a value of STK_SIZE_POISON */ 
     STK_CAP_OVERFL = 3, /**< Stack size is more than stack capacity */
@@ -96,6 +104,28 @@ int StackError(Stack *stack);
 //! @return 1 on success, 0 on failure
 //------------------------------------------------------------ 
 int writeErrCode(int err);
+
+//------------------------------------------------------------ 
+//! Performs a bytewise comparison of two instances of the same type
+//!
+//! @param[in]  elem1   Pointer to the first element
+//! @param[in]  elem2   Pointer to the second element
+//! @param[in]  size    Size of the type
+//!
+//! @return true if all bytes are equal, false otherwise
+//------------------------------------------------------------ 
+bool isEqualBytes(const void *elem1, const void *elem2, size_t size);
+
+//------------------------------------------------------------ 
+//! Returns the adress of the element at index in an arbitrary array
+//!
+//! @param[in]  start   Start of the array
+//! @param[in]  index   Index of the element
+//! @param[in]  size    Size of the type held by the array
+//!
+//! @return Address of the element at index in the array
+//------------------------------------------------------------ 
+void *getIndexAdress(void *start, size_t index, size_t size);
 
 //------------------------------------------------------------ 
 //! Prints all information about the stack to the log file
@@ -158,15 +188,19 @@ void StackPush(Stack *stack, void *src, int *err = nullptr);
 //------------------------------------------------------------ 
 int StackResize(Stack *stack, size_t size);
 
-#define ASSERT_OK(STACK)                        \
-do {                                            \
-    int ret = StackError(STACK);                \
-    if (ret != 0) {                             \
-        StackDump(STACK, "ASSERT_OK failed");   \
-        assert(!"Invariant failure");           \
-    }                                           \
-} while (0)
+void StackTop(Stack *stack, void *dest, int *err);
 
+#define ASSERT_OK(STACK)                            \
+do {                                                \
+    if (DEBUG_MODE > 0) {                           \
+        int ret = StackError(STACK);                \
+        if (ret != 0) {                             \
+            StackDump(STACK, "ASSERT_OK failed");   \
+            assert(!"Invariant failure");           \
+        }                                           \
+    }                                               \
+} while (0)
+//__LINE__, __func__, __FILE__
 #define StackCtor(stack, elemSize, capacity)    \
 do {                                           \
     callInfo inf = {};                         \
