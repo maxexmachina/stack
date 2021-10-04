@@ -30,13 +30,24 @@ elem_t getPoisonedInstance() {
 
 bool isEqualBytes(const void *elem1, const void *elem2, size_t size) {
     for (size_t i = 0; i < size; ++i) {
-        if (*((char *)elem1 + i) != *((char *)elem2 + i)) {
+        if (*((const char *)elem1 + i) != *((const char *)elem2 + i)) {
             return false;
         }
     }
     return true;
 }
 
+#if DEBUG_MODE > 1
+canary_t *getDataCanaryRight(Stack *stack) {
+    return (canary_t *)getIndexAdress(stack->data, stack->capacity, stack->elemSize);
+}
+
+canary_t *getDataCanaryLeft(Stack *stack) {
+    return (canary_t *)((char *)stack->data - sizeof(canary_t));
+}
+#endif
+
+#if DEBUG_MODE > 0 
 int StackError(Stack *stack) {
     if (!stack) {
         return STK_NULL;
@@ -47,6 +58,20 @@ int StackError(Stack *stack) {
     if (stack->size == STK_SIZE_POISON) {
         return STK_INV_SIZE;
     }
+#if DEBUG_MODE > 1
+    if (stack->canaryLeft != canaryVal) {
+        return STK_CAN_LFT;
+    }
+    if (stack->canaryRight != canaryVal) {
+        return STK_CAN_RGT;
+    }
+    if (*getDataCanaryLeft(stack) != canaryVal) {
+        return STK_DATA_CAN_LFT;
+    }
+    if (*getDataCanaryRight(stack) != canaryVal) {
+        return STK_DATA_CAN_RGT;
+    }
+#endif
     return 0;
 }
 
@@ -62,11 +87,26 @@ int writeErrCode(int err) {
         case STK_CAP_OVERFL:
             res = writeToLog("STK_CAP_OVERFL ");
             break;
+#if DEBUG_MODE > 1 
+        case STK_CAN_LFT:
+            res = writeToLog("STK_CAN_LFT ");
+            break;
+        case STK_CAN_RGT:
+            res = writeToLog("STK_CAN_RGT ");
+            break;
+        case STK_DATA_CAN_LFT:
+            res = writeToLog("STK_DATA_CAN_LFT ");
+            break;
+        case STK_DATA_CAN_RGT:
+            res = writeToLog("STK_DATA_CAN_RGT ");
+            break;
+#endif
         default:
             res = writeToLog("UNDEFINED ");
     }
     return res >= 0;
 }
+#endif
 
 void *getIndexAdress(void *start, size_t index, size_t size) {
     return (char *)start + index * size; 
@@ -94,6 +134,12 @@ int StackDump_(Stack *stack, const char *reason, callInfo info, const char *stkN
     if (!stack) {
         dumpResult *= writeToLog("stack : nullptr\n");
     } else {
+#if DEBUG_MODE > 1
+        dumpResult *= writeToLog("Left canary: %llx\nRight canary: %llx\n"
+                                 "Left data canary: %llx\nRight data canary: %llx\n",
+                                 stack->canaryLeft, stack->canaryRight,
+                                 *getDataCanaryLeft(stack), *getDataCanaryRight(stack));
+#endif
         dumpResult *= writeToLog("size = %zu\ncapacity = %zu\nelement size = %zu\ndata[%p]:\n"
                                  "{\n", stack->size, stack->capacity, stack->elemSize, (void *)stack->data);
 
@@ -140,11 +186,24 @@ int StackCtor_(Stack *stack, size_t elemSize, size_t capacity, callInfo info) {
 #endif
 
     if (capacity != 0) {
+#if DEBUG_MODE > 1
+        void *data = malloc(elemSize * capacity + 2 * sizeof(canary_t)); 
+        if (data == nullptr) {
+            printf("There was an error allocating memory for the stack : %s\n", strerror(errno));
+            return STK_NOMMRY;
+        }
+        *(canary_t *)data = canaryVal;
+        stack->data = (char *)data + sizeof(canary_t);
+        canary_t *canRight = (canary_t *)getIndexAdress(stack->data, capacity, elemSize);
+        *canRight = canaryVal;
+#else 
         stack->data = calloc(capacity, elemSize);
         if (stack->data == nullptr) {
             printf("There was an error allocating memory for the stack : %s\n", strerror(errno));
             return STK_NOMMRY;
         }
+#endif
+
     }
     stack->size = 0;
     stack->elemSize = elemSize;
@@ -155,31 +214,54 @@ int StackCtor_(Stack *stack, size_t elemSize, size_t capacity, callInfo info) {
     stack->ctorCallFile = info.file;
     stack->ctorCallLine = info.line; 
 
+#if DEBUG_MODE > 1
+    stack->canaryLeft = canaryVal; 
+    stack->canaryRight = canaryVal; 
+#endif
+
+    ASSERT_OK(stack);
+#endif
+
+    return 1;
+}
+
+int StackResize(Stack *stack, size_t size) {
+#if DEBUG_MODE > 0
+    ASSERT_OK(stack);
+#endif
+
+    const size_t newCap = size;
+#if DEBUG_MODE > 1
+    void *newData = realloc((char *)stack->data - sizeof(canary_t), newCap * stack->elemSize + 2 * sizeof(canary_t));
+#else
+    void *newData = realloc(stack->data, newCap * stack->elemSize);
+#endif
+
+    if (newData == nullptr) {
+        printf("There was an error allocating memory : %s\n", strerror(errno));
+        return 0;
+    }
+
+#if DEBUG_MODE > 1
+    *(canary_t *)newData = canaryVal;
+    stack->data = (char *)newData + sizeof(canary_t);
+    canary_t *canRight = (canary_t *)getIndexAdress(stack->data, newCap, stack->elemSize); 
+    *canRight = canaryVal;
+#else
+    stack->data = newData;
+#endif
+    stack->capacity = newCap;
+
+#if DEBUG_MODE > 0
     ASSERT_OK(stack);
 #endif
     return 1;
 }
 
-int StackResize(Stack *stack, size_t size) {
-    ASSERT_OK(stack);
-
-    const size_t newCap = size;
-    void *newData = realloc(stack->data, newCap * stack->elemSize);
-    if (newData == nullptr) {
-        printf("There was an error allocating memory : %s\n", strerror(errno));
-        return 0;
-    }
-    stack->data = newData;
-    stack->capacity = newCap;
-
-    ASSERT_OK(stack);
-    return 1;
-}
-
 void StackDtor(Stack *stack) {
+#if DEBUG_MODE > 0
     ASSERT_OK(stack);
 
-#if DEBUG_MODE > 0
     elem_t poison = getPoisonedInstance();
     for (size_t i = 0; i < stack->capacity; i++) {
         myMemCpy(getIndexAdress(stack->data, i, stack->elemSize),
@@ -189,15 +271,21 @@ void StackDtor(Stack *stack) {
     stack->size = STK_SIZE_POISON;
     stack->capacity = STK_SIZE_POISON;
 #endif
+
+#if DEBUG_MODE > 1
+    free((char *)stack->data - sizeof(canary_t));
+#else
     free(stack->data);
+#endif
+
 #if DEBUG_MODE > 0
     stack->data = (int *)13;
 #endif
 }
 
 void StackPush(Stack *stack, void *src, int *err) {
-    ASSERT_OK(stack);
 #if DEBUG_MODE > 0
+    ASSERT_OK(stack);
     assert(src);
 #endif
 
@@ -219,13 +307,14 @@ void StackPush(Stack *stack, void *src, int *err) {
     myMemCpy(getIndexAdress(stack->data, stack->size++, stack->elemSize),
              src, stack->elemSize);
 
+#if DEBUG_MODE > 0
     ASSERT_OK(stack);
+#endif
 }
 
 void StackPop(Stack *stack, void *dest, int *err) {
-    ASSERT_OK(stack);
-
 #if DEBUG_MODE > 0
+    ASSERT_OK(stack);
     assert(dest);
 #endif
 
@@ -248,11 +337,16 @@ void StackPop(Stack *stack, void *dest, int *err) {
             return;
         }
     }
+#if DEBUG_MODE > 0
     ASSERT_OK(stack);
+#endif
 }
 
 void StackTop(Stack *stack, void *dest, int *err) {
+#if DEBUG_MODE > 0
     ASSERT_OK(stack);
+#endif
+
     if (stack->size == 0) {
         printf("No elements on the stack");
         if (err) {
@@ -262,5 +356,8 @@ void StackTop(Stack *stack, void *dest, int *err) {
     }
     myMemCpy(dest, getIndexAdress(stack->data, stack->size - 1, stack->elemSize),
              stack->elemSize);
+
+#if DEBUG_MODE > 0 
     ASSERT_OK(stack);
+#endif
 }

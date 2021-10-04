@@ -14,7 +14,7 @@ int main() {
         StackPush(&stack, &v); 
     }
 
-#ifdef DEBUG_MODE
+#if DEBUG_MODE > 0
     StackDump(&stack, "Diagnostic");
 #endif
 
