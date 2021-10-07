@@ -72,6 +72,12 @@ int StackError(Stack *stack) {
         return STK_DATA_CAN_RGT;
     }
 #endif
+#if DEBUG_MODE > 2
+    size_t hash = stack->hash;
+    if (StackHash(stack) != hash) {
+        return STK_HASH_FLR;
+    }
+#endif
     return 0;
 }
 
@@ -99,6 +105,11 @@ int writeErrCode(int err) {
             break;
         case STK_DATA_CAN_RGT:
             res = writeToLog("STK_DATA_CAN_RGT ");
+            break;
+#endif
+#if DEBUG_MODE > 2
+        case STK_HASH_FLR:
+            res = writeToLog("STK_HASH_FLR ");
             break;
 #endif
         default:
@@ -140,6 +151,9 @@ int StackDump_(Stack *stack, const char *reason, callInfo info, const char *stkN
                                  stack->canaryLeft, stack->canaryRight,
                                  *getDataCanaryLeft(stack), *getDataCanaryRight(stack));
 #endif
+#if DEBUG_MODE > 2
+        dumpResult *= writeToLog("Stack hash: %lu\n", stack->hash);
+#endif
         dumpResult *= writeToLog("size = %zu\ncapacity = %zu\nelement size = %zu\ndata[%p]:\n"
                                  "{\n", stack->size, stack->capacity, stack->elemSize, (void *)stack->data);
 
@@ -177,6 +191,44 @@ int StackDump_(Stack *stack, const char *reason, callInfo info, const char *stkN
         closeLog();
     }
     return 1;
+}
+#endif
+
+#if DEBUG_MODE > 2
+
+#define A 54059 /* a prime */
+#define B 76963 /* another prime */
+#define C 86969 /* yet another prime */
+#define FIRSTH 37 /* also prime */
+size_t hashStr(const char* s) {
+    if (!s) {
+        return 0;
+    }
+        unsigned h = FIRSTH;
+    while (*s) {
+        h = (h * A) ^ (s[0] * B);
+        s++;
+    }
+    return h;
+}
+
+size_t hashData(void *data, size_t size) {
+    size_t hash = A;
+    for (size_t i = 0; i < size; i++) {
+        hash ^= *((char *)data + i) << (i % 16);
+    }
+    return hash;
+}
+
+size_t StackHash(Stack *stack) {
+    size_t oldHash = stack->hash;
+    stack->hash = 0;
+    size_t hash = (size_t)stack->canaryLeft ^ stack->size << 16 | stack->capacity | 
+           8 ^ stack->elemSize ^ hashData(stack->data, stack->capacity) ^ 
+           hashStr(stack->typeName) | hashStr(stack->ctorCallFuncName) ^
+           hashStr(stack->ctorCallFile) | (size_t)stack->ctorCallLine;
+    stack->hash = oldHash;
+    return hash; 
 }
 #endif
 
@@ -219,6 +271,10 @@ int StackCtor_(Stack *stack, size_t elemSize, size_t capacity, callInfo info) {
     stack->canaryRight = canaryVal; 
 #endif
 
+#if DEBUG_MODE > 2
+    stack->hash = StackHash(stack);
+#endif
+
     ASSERT_OK(stack);
 #endif
 
@@ -252,6 +308,10 @@ int StackResize(Stack *stack, size_t size) {
 #endif
     stack->capacity = newCap;
 
+#if DEBUG_MODE > 2
+    stack->hash = StackHash(stack);
+#endif
+
 #if DEBUG_MODE > 0
     ASSERT_OK(stack);
 #endif
@@ -267,7 +327,6 @@ void StackDtor(Stack *stack) {
         myMemCpy(getIndexAdress(stack->data, i, stack->elemSize),
                  &poison, stack->elemSize);
     }
-    StackDump(stack, "Dtor");
     stack->size = STK_SIZE_POISON;
     stack->capacity = STK_SIZE_POISON;
 #endif
@@ -306,6 +365,9 @@ void StackPush(Stack *stack, void *src, int *err) {
     }
     myMemCpy(getIndexAdress(stack->data, stack->size++, stack->elemSize),
              src, stack->elemSize);
+#if DEBUG_MODE > 2
+    stack->hash = StackHash(stack);
+#endif
 
 #if DEBUG_MODE > 0
     ASSERT_OK(stack);
@@ -328,6 +390,9 @@ void StackPop(Stack *stack, void *dest, int *err) {
 
     myMemCpy(dest, getIndexAdress(stack->data, --stack->size, stack->elemSize),
              stack->elemSize);
+#if DEBUG_MODE > 2
+    stack->hash = StackHash(stack);
+#endif
     if (stack->size > 0 && stack->size == stack->capacity / 4) {
         if (StackResize(stack, stack->capacity / 2) == 0) {
             printf("There was an error shrinking stack\n");

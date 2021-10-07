@@ -18,7 +18,7 @@ int main() {
     StackDump(&stack, "Diagnostic");
 #endif
 
-    for (size_t i = 0; i < 90; ++i) {
+    for (size_t i = 0; i < 100; ++i) {
         StackPop(&stack, &v);
     }
     StackDtor(&stack);

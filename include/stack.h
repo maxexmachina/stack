@@ -12,7 +12,7 @@
     #endif
 #endif
 
-#define DEBUG_MODE 2
+#define DEBUG_MODE 3
 
 //------------------ User type -------------
 
@@ -65,6 +65,9 @@ enum StkError : int {
     STK_DATA_CAN_LFT = 8,
     STK_DATA_CAN_RGT = 9,
 #endif
+#if DEBUG_MODE > 2
+    STK_HASH_FLR = 10,
+#endif
 };
 
 //! Encapsulates info about function call for debug
@@ -98,10 +101,22 @@ struct Stack {
     int ctorCallLine; /**< Line of the constructor call */
 #endif
 
+#if DEBUG_MODE > 2
+    size_t hash;
+#endif
+
 #if DEBUG_MODE > 1
     canary_t canaryRight;
 #endif
 };
+
+#if DEBUG_MODE > 2
+size_t hashStr(const char* s);
+
+size_t hashData(void *data, size_t size);
+
+size_t StackHash(Stack *stack);
+#endif
 
 //! Default stack capacity
 const size_t DEFAULT_STACK_CAPACITY = 10;
