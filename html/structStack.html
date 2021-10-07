@@ -76,14 +76,16 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:ac6da0059516e42463ddacb5f859ec06c"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structStack.html#ac6da0059516e42463ddacb5f859ec06c">data</a></td></tr>
-<tr class="separator:ac6da0059516e42463ddacb5f859ec06c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa996b7e0073208dacfcbff9c633daec0"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structStack.html#aa996b7e0073208dacfcbff9c633daec0">elemSize</a></td></tr>
-<tr class="separator:aa996b7e0073208dacfcbff9c633daec0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a141734e8756441b12939530030921bad"><td class="memItemLeft" align="right" valign="top"><a class="el" href="stack_8h.html#a8d64a52b00393b325e18fdabe2dbe985">canary_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structStack.html#a141734e8756441b12939530030921bad">canaryLeft</a></td></tr>
+<tr class="separator:a141734e8756441b12939530030921bad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3a469595caaaf49bbce059efabbe07b5"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structStack.html#a3a469595caaaf49bbce059efabbe07b5">size</a></td></tr>
 <tr class="separator:a3a469595caaaf49bbce059efabbe07b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afb6d4ad9d2904c20d50102d310c963e0"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structStack.html#afb6d4ad9d2904c20d50102d310c963e0">capacity</a></td></tr>
 <tr class="separator:afb6d4ad9d2904c20d50102d310c963e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa996b7e0073208dacfcbff9c633daec0"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structStack.html#aa996b7e0073208dacfcbff9c633daec0">elemSize</a></td></tr>
+<tr class="separator:aa996b7e0073208dacfcbff9c633daec0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6da0059516e42463ddacb5f859ec06c"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structStack.html#ac6da0059516e42463ddacb5f859ec06c">data</a></td></tr>
+<tr class="separator:ac6da0059516e42463ddacb5f859ec06c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a765d21bea881872543dfbd55e702210d"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structStack.html#a765d21bea881872543dfbd55e702210d">typeName</a></td></tr>
 <tr class="separator:a765d21bea881872543dfbd55e702210d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ace9d125940ec93ff78583875dfeb563f"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structStack.html#ace9d125940ec93ff78583875dfeb563f">ctorCallFuncName</a></td></tr>
@@ -92,10 +94,42 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a8907636dc2f0bb22e84aea5a0c7449e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad91d76b7a39acafa1ddef12cdd01574d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structStack.html#ad91d76b7a39acafa1ddef12cdd01574d">ctorCallLine</a></td></tr>
 <tr class="separator:ad91d76b7a39acafa1ddef12cdd01574d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae046b1842476a23e7d28d03ad4e711d1"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structStack.html#ae046b1842476a23e7d28d03ad4e711d1">hash</a></td></tr>
+<tr class="separator:ae046b1842476a23e7d28d03ad4e711d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae273200928d2237b2d71d5571d42c58"><td class="memItemLeft" align="right" valign="top"><a class="el" href="stack_8h.html#a8d64a52b00393b325e18fdabe2dbe985">canary_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structStack.html#aae273200928d2237b2d71d5571d42c58">canaryRight</a></td></tr>
+<tr class="separator:aae273200928d2237b2d71d5571d42c58"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Declares a stack data structure as a struct. </p>
 </div><h2 class="groupheader">Member Data Documentation</h2>
+<a id="a141734e8756441b12939530030921bad" name="a141734e8756441b12939530030921bad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a141734e8756441b12939530030921bad">&#9670;&nbsp;</a></span>canaryLeft</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="stack_8h.html#a8d64a52b00393b325e18fdabe2dbe985">canary_t</a> Stack::canaryLeft</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aae273200928d2237b2d71d5571d42c58" name="aae273200928d2237b2d71d5571d42c58"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae273200928d2237b2d71d5571d42c58">&#9670;&nbsp;</a></span>canaryRight</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="stack_8h.html#a8d64a52b00393b325e18fdabe2dbe985">canary_t</a> Stack::canaryRight</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="afb6d4ad9d2904c20d50102d310c963e0" name="afb6d4ad9d2904c20d50102d310c963e0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afb6d4ad9d2904c20d50102d310c963e0">&#9670;&nbsp;</a></span>capacity</h2>
 
@@ -183,6 +217,20 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p >Size of the stored type in bytes </p>
+
+</div>
+</div>
+<a id="ae046b1842476a23e7d28d03ad4e711d1" name="ae046b1842476a23e7d28d03ad4e711d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae046b1842476a23e7d28d03ad4e711d1">&#9670;&nbsp;</a></span>hash</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t Stack::hash</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>

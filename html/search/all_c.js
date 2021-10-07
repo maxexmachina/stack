@@ -1,5 +1,30 @@
 var searchData=
 [
-  ['writeerrcode_0',['writeErrCode',['../stack_8h.html#aceabd4a4767b29cd82fb91f7592538a2',1,'writeErrCode(int err):&#160;stack.cpp'],['../stack_8cpp.html#aceabd4a4767b29cd82fb91f7592538a2',1,'writeErrCode(int err):&#160;stack.cpp']]],
-  ['writetolog_1',['writeToLog',['../log_8h.html#a52cdc2554f9440eadc5454f99a2923ea',1,'writeToLog(const char *format ...):&#160;log.cpp'],['../log_8cpp.html#a52cdc2554f9440eadc5454f99a2923ea',1,'writeToLog(const char *format ...):&#160;log.cpp']]]
+  ['size_0',['size',['../structStack.html#a3a469595caaaf49bbce059efabbe07b5',1,'Stack']]],
+  ['stack_1',['Stack',['../structStack.html',1,'']]],
+  ['stack_2ecpp_2',['stack.cpp',['../stack_8cpp.html',1,'']]],
+  ['stack_2eh_3',['stack.h',['../stack_8h.html',1,'']]],
+  ['stackctor_4',['StackCtor',['../stack_8h.html#a4fb6cc32b2e5aa37959ef005aecc0316',1,'stack.h']]],
+  ['stackctor_5f_5',['StackCtor_',['../stack_8h.html#acaa4b30c616f979006371a1f58feda76',1,'StackCtor_(Stack *stack, size_t elemSize, size_t capacity, callInfo info):&#160;stack.cpp'],['../stack_8cpp.html#acaa4b30c616f979006371a1f58feda76',1,'StackCtor_(Stack *stack, size_t elemSize, size_t capacity, callInfo info):&#160;stack.cpp']]],
+  ['stackdtor_6',['StackDtor',['../stack_8h.html#a282766b4bc512d86d5aa62efead2fc27',1,'StackDtor(Stack *stack):&#160;stack.cpp'],['../stack_8cpp.html#a282766b4bc512d86d5aa62efead2fc27',1,'StackDtor(Stack *stack):&#160;stack.cpp']]],
+  ['stackdump_7',['StackDump',['../stack_8h.html#ab1db91240193a084ca60ec19b337237c',1,'stack.h']]],
+  ['stackdump_5f_8',['StackDump_',['../stack_8h.html#a520eb42f54c34742009160bd854f7b9b',1,'StackDump_(Stack *stack, const char *reason, callInfo info, const char *stkName):&#160;stack.cpp'],['../stack_8cpp.html#a520eb42f54c34742009160bd854f7b9b',1,'StackDump_(Stack *stack, const char *reason, callInfo info, const char *stkName):&#160;stack.cpp']]],
+  ['stackerror_9',['StackError',['../stack_8h.html#aa303d7ea38acea2b29fe6907e1a4605a',1,'StackError(Stack *stack):&#160;stack.cpp'],['../stack_8cpp.html#aa303d7ea38acea2b29fe6907e1a4605a',1,'StackError(Stack *stack):&#160;stack.cpp']]],
+  ['stackhash_10',['StackHash',['../stack_8h.html#a73e03bb5f15d22ae4c031480f6ae692e',1,'StackHash(Stack *stack):&#160;stack.cpp'],['../stack_8cpp.html#a73e03bb5f15d22ae4c031480f6ae692e',1,'StackHash(Stack *stack):&#160;stack.cpp']]],
+  ['stackpop_11',['StackPop',['../stack_8h.html#ac929759ec3f8d934f062955746e8c1eb',1,'StackPop(Stack *stack, void *dest, int *err=nullptr):&#160;stack.cpp'],['../stack_8cpp.html#a8b1db7026bbf2010a98312a78c214aca',1,'StackPop(Stack *stack, void *dest, int *err):&#160;stack.cpp']]],
+  ['stackpush_12',['StackPush',['../stack_8h.html#a33e6efdcf8c2623ce32ba4724c5f0b68',1,'StackPush(Stack *stack, void *src, int *err=nullptr):&#160;stack.cpp'],['../stack_8cpp.html#a1f7449f58b080af56ab71f1d905fb02e',1,'StackPush(Stack *stack, void *src, int *err):&#160;stack.cpp']]],
+  ['stackresize_13',['StackResize',['../stack_8h.html#ab678ced17c93558a89d06ce2a5a58242',1,'StackResize(Stack *stack, size_t size):&#160;stack.cpp'],['../stack_8cpp.html#ab678ced17c93558a89d06ce2a5a58242',1,'StackResize(Stack *stack, size_t size):&#160;stack.cpp']]],
+  ['stacktop_14',['StackTop',['../stack_8h.html#af57c9343e4f952fd48d23c54211c9cde',1,'StackTop(Stack *stack, void *dest, int *err):&#160;stack.cpp'],['../stack_8cpp.html#af57c9343e4f952fd48d23c54211c9cde',1,'StackTop(Stack *stack, void *dest, int *err):&#160;stack.cpp']]],
+  ['stk_5fcan_5flft_15',['STK_CAN_LFT',['../stack_8h.html#a6c641af4f5108f28b3af16ea1a1eebdea2cbfee312307cde1af41dc868d478c41',1,'stack.h']]],
+  ['stk_5fcan_5frgt_16',['STK_CAN_RGT',['../stack_8h.html#a6c641af4f5108f28b3af16ea1a1eebdeaffcaa76b5489bbb7f3587404318ee94c',1,'stack.h']]],
+  ['stk_5fcap_5foverfl_17',['STK_CAP_OVERFL',['../stack_8h.html#a6c641af4f5108f28b3af16ea1a1eebdea02a1eabf5cf57e164eff84af2504e642',1,'stack.h']]],
+  ['stk_5fdata_5fcan_5flft_18',['STK_DATA_CAN_LFT',['../stack_8h.html#a6c641af4f5108f28b3af16ea1a1eebdeab68380c64c444851eb9ae61fd75f32ca',1,'stack.h']]],
+  ['stk_5fdata_5fcan_5frgt_19',['STK_DATA_CAN_RGT',['../stack_8h.html#a6c641af4f5108f28b3af16ea1a1eebdeacf12e669d662d80e826c09f664718f60',1,'stack.h']]],
+  ['stk_5fhash_5fflr_20',['STK_HASH_FLR',['../stack_8h.html#a6c641af4f5108f28b3af16ea1a1eebdea6b721204cd4e49a002a233356c0883cc',1,'stack.h']]],
+  ['stk_5finv_5fsize_21',['STK_INV_SIZE',['../stack_8h.html#a6c641af4f5108f28b3af16ea1a1eebdea34fc85cc627098b08a78ec4be52c9262',1,'stack.h']]],
+  ['stk_5fno_5ferr_22',['STK_NO_ERR',['../stack_8h.html#a6c641af4f5108f28b3af16ea1a1eebdea46a5894752f4447543445236d366b7ac',1,'stack.h']]],
+  ['stk_5fnommry_23',['STK_NOMMRY',['../stack_8h.html#a6c641af4f5108f28b3af16ea1a1eebdea70b8dffef378bfd11e07d91133d5f208',1,'stack.h']]],
+  ['stk_5fnull_24',['STK_NULL',['../stack_8h.html#a6c641af4f5108f28b3af16ea1a1eebdea269937c44f5900b281d6321c4caac4b9',1,'stack.h']]],
+  ['stk_5funderfl_25',['STK_UNDERFL',['../stack_8h.html#a6c641af4f5108f28b3af16ea1a1eebdeac96652c90b62db479f565a5ea2c0e4f5',1,'stack.h']]],
+  ['stkerror_26',['StkError',['../stack_8h.html#a6c641af4f5108f28b3af16ea1a1eebde',1,'stack.h']]]
 ];

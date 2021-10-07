@@ -9,16 +9,43 @@
 {\ttfamily \#include \char`\"{}../include/mymemcpy.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}../include/stack.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}../include/log.\+h\char`\"{}}\newline
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{stack_8cpp_a955f504eccf76b4eb2489c0adab03121}{A}}~54059 /$\ast$ a prime $\ast$/
+\item 
+\#define \mbox{\hyperlink{stack_8cpp_a111da81ae5883147168bbb8366377b10}{B}}~76963 /$\ast$ another prime $\ast$/
+\item 
+\#define \mbox{\hyperlink{stack_8cpp_ac4cf4b2ab929bd23951a8676eeac086b}{C}}~86969 /$\ast$ yet another prime $\ast$/
+\item 
+\#define \mbox{\hyperlink{stack_8cpp_a8f2d9af05b9e8b17d5657db338c2705f}{FIRSTH}}~37 /$\ast$ also prime $\ast$/
+\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
 char $\ast$ \mbox{\hyperlink{stack_8cpp_ac258f0fde27f7e5c0485497517a1ac16}{format\+Instance}} (const \mbox{\hyperlink{stack_8h_a1e651c3ee0c1beff1aebd53973ed1ad6}{elem\+\_\+t}} $\ast$instance)
 \item 
+\mbox{\hyperlink{stack_8h_a1e651c3ee0c1beff1aebd53973ed1ad6}{elem\+\_\+t}} \mbox{\hyperlink{stack_8cpp_af64abeb6f175ac562d76c094f2ab4fc4}{get\+Poisoned\+Instance}} ()
+\item 
+bool \mbox{\hyperlink{stack_8cpp_ac1be3fc7295354a0a0cbe65cc82baefd}{is\+Equal\+Bytes}} (const void $\ast$elem1, const void $\ast$elem2, size\+\_\+t size)
+\item 
+\mbox{\hyperlink{stack_8h_a8d64a52b00393b325e18fdabe2dbe985}{canary\+\_\+t}} $\ast$ \mbox{\hyperlink{stack_8cpp_a89dc88cd35d589acc553fa15d6454445}{get\+Data\+Canary\+Right}} (\mbox{\hyperlink{structStack}{Stack}} $\ast$stack)
+\item 
+\mbox{\hyperlink{stack_8h_a8d64a52b00393b325e18fdabe2dbe985}{canary\+\_\+t}} $\ast$ \mbox{\hyperlink{stack_8cpp_a80a5567b061ada91971bed95473f762c}{get\+Data\+Canary\+Left}} (\mbox{\hyperlink{structStack}{Stack}} $\ast$stack)
+\item 
 int \mbox{\hyperlink{stack_8cpp_aa303d7ea38acea2b29fe6907e1a4605a}{Stack\+Error}} (\mbox{\hyperlink{structStack}{Stack}} $\ast$stack)
 \item 
 int \mbox{\hyperlink{stack_8cpp_aceabd4a4767b29cd82fb91f7592538a2}{write\+Err\+Code}} (int err)
 \item 
+void $\ast$ \mbox{\hyperlink{stack_8cpp_aa09d86c1eafa00d9cb2a53d9ad47dbbc}{get\+Index\+Adress}} (void $\ast$start, size\+\_\+t index, size\+\_\+t size)
+\item 
 int \mbox{\hyperlink{stack_8cpp_a520eb42f54c34742009160bd854f7b9b}{Stack\+Dump\+\_\+}} (\mbox{\hyperlink{structStack}{Stack}} $\ast$stack, const char $\ast$reason, \mbox{\hyperlink{structcallInfo}{call\+Info}} info, const char $\ast$stk\+Name)
+\item 
+size\+\_\+t \mbox{\hyperlink{stack_8cpp_ae0881f60155acc7402d81b15113ff073}{hash\+Str}} (const char $\ast$s)
+\item 
+size\+\_\+t \mbox{\hyperlink{stack_8cpp_af5e8904cca23bb913287e1e653255800}{hash\+Data}} (void $\ast$data, size\+\_\+t size)
+\item 
+size\+\_\+t \mbox{\hyperlink{stack_8cpp_a73e03bb5f15d22ae4c031480f6ae692e}{Stack\+Hash}} (\mbox{\hyperlink{structStack}{Stack}} $\ast$stack)
 \item 
 int \mbox{\hyperlink{stack_8cpp_acaa4b30c616f979006371a1f58feda76}{Stack\+Ctor\+\_\+}} (\mbox{\hyperlink{structStack}{Stack}} $\ast$stack, size\+\_\+t elem\+Size, size\+\_\+t capacity, \mbox{\hyperlink{structcallInfo}{call\+Info}} info)
 \item 
@@ -29,7 +56,36 @@ void \mbox{\hyperlink{stack_8cpp_a282766b4bc512d86d5aa62efead2fc27}{Stack\+Dtor}
 void \mbox{\hyperlink{stack_8cpp_a1f7449f58b080af56ab71f1d905fb02e}{Stack\+Push}} (\mbox{\hyperlink{structStack}{Stack}} $\ast$stack, void $\ast$src, int $\ast$err)
 \item 
 void \mbox{\hyperlink{stack_8cpp_a8b1db7026bbf2010a98312a78c214aca}{Stack\+Pop}} (\mbox{\hyperlink{structStack}{Stack}} $\ast$stack, void $\ast$dest, int $\ast$err)
+\item 
+void \mbox{\hyperlink{stack_8cpp_af57c9343e4f952fd48d23c54211c9cde}{Stack\+Top}} (\mbox{\hyperlink{structStack}{Stack}} $\ast$stack, void $\ast$dest, int $\ast$err)
 \end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{stack_8cpp_a955f504eccf76b4eb2489c0adab03121}\label{stack_8cpp_a955f504eccf76b4eb2489c0adab03121}} 
+\index{stack.cpp@{stack.cpp}!A@{A}}
+\index{A@{A}!stack.cpp@{stack.cpp}}
+\doxysubsubsection{\texorpdfstring{A}{A}}
+{\footnotesize\ttfamily \#define A~54059 /$\ast$ a prime $\ast$/}
+
+\mbox{\Hypertarget{stack_8cpp_a111da81ae5883147168bbb8366377b10}\label{stack_8cpp_a111da81ae5883147168bbb8366377b10}} 
+\index{stack.cpp@{stack.cpp}!B@{B}}
+\index{B@{B}!stack.cpp@{stack.cpp}}
+\doxysubsubsection{\texorpdfstring{B}{B}}
+{\footnotesize\ttfamily \#define B~76963 /$\ast$ another prime $\ast$/}
+
+\mbox{\Hypertarget{stack_8cpp_ac4cf4b2ab929bd23951a8676eeac086b}\label{stack_8cpp_ac4cf4b2ab929bd23951a8676eeac086b}} 
+\index{stack.cpp@{stack.cpp}!C@{C}}
+\index{C@{C}!stack.cpp@{stack.cpp}}
+\doxysubsubsection{\texorpdfstring{C}{C}}
+{\footnotesize\ttfamily \#define C~86969 /$\ast$ yet another prime $\ast$/}
+
+\mbox{\Hypertarget{stack_8cpp_a8f2d9af05b9e8b17d5657db338c2705f}\label{stack_8cpp_a8f2d9af05b9e8b17d5657db338c2705f}} 
+\index{stack.cpp@{stack.cpp}!FIRSTH@{FIRSTH}}
+\index{FIRSTH@{FIRSTH}!stack.cpp@{stack.cpp}}
+\doxysubsubsection{\texorpdfstring{FIRSTH}{FIRSTH}}
+{\footnotesize\ttfamily \#define FIRSTH~37 /$\ast$ also prime $\ast$/}
+
 
 
 \doxysubsection{Function Documentation}
@@ -48,6 +104,81 @@ User defined function that formats their data type to a string for debug output
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 String version of the user type instance on success, nullptr on failure 
+\end{DoxyReturn}
+\mbox{\Hypertarget{stack_8cpp_a80a5567b061ada91971bed95473f762c}\label{stack_8cpp_a80a5567b061ada91971bed95473f762c}} 
+\index{stack.cpp@{stack.cpp}!getDataCanaryLeft@{getDataCanaryLeft}}
+\index{getDataCanaryLeft@{getDataCanaryLeft}!stack.cpp@{stack.cpp}}
+\doxysubsubsection{\texorpdfstring{getDataCanaryLeft()}{getDataCanaryLeft()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{stack_8h_a8d64a52b00393b325e18fdabe2dbe985}{canary\+\_\+t}} $\ast$ get\+Data\+Canary\+Left (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structStack}{Stack}} $\ast$}]{stack }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{stack_8cpp_a89dc88cd35d589acc553fa15d6454445}\label{stack_8cpp_a89dc88cd35d589acc553fa15d6454445}} 
+\index{stack.cpp@{stack.cpp}!getDataCanaryRight@{getDataCanaryRight}}
+\index{getDataCanaryRight@{getDataCanaryRight}!stack.cpp@{stack.cpp}}
+\doxysubsubsection{\texorpdfstring{getDataCanaryRight()}{getDataCanaryRight()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{stack_8h_a8d64a52b00393b325e18fdabe2dbe985}{canary\+\_\+t}} $\ast$ get\+Data\+Canary\+Right (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structStack}{Stack}} $\ast$}]{stack }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{stack_8cpp_aa09d86c1eafa00d9cb2a53d9ad47dbbc}\label{stack_8cpp_aa09d86c1eafa00d9cb2a53d9ad47dbbc}} 
+\index{stack.cpp@{stack.cpp}!getIndexAdress@{getIndexAdress}}
+\index{getIndexAdress@{getIndexAdress}!stack.cpp@{stack.cpp}}
+\doxysubsubsection{\texorpdfstring{getIndexAdress()}{getIndexAdress()}}
+{\footnotesize\ttfamily void $\ast$ get\+Index\+Adress (\begin{DoxyParamCaption}\item[{void $\ast$}]{start,  }\item[{size\+\_\+t}]{index,  }\item[{size\+\_\+t}]{size }\end{DoxyParamCaption})}
+
+Returns the adress of the element at index in an arbitrary array
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em start} & Start of the array \\
+\hline
+\mbox{\texttt{ in}}  & {\em index} & Index of the element \\
+\hline
+\mbox{\texttt{ in}}  & {\em size} & Size of the type held by the array\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Address of the element at index in the array 
+\end{DoxyReturn}
+\mbox{\Hypertarget{stack_8cpp_af64abeb6f175ac562d76c094f2ab4fc4}\label{stack_8cpp_af64abeb6f175ac562d76c094f2ab4fc4}} 
+\index{stack.cpp@{stack.cpp}!getPoisonedInstance@{getPoisonedInstance}}
+\index{getPoisonedInstance@{getPoisonedInstance}!stack.cpp@{stack.cpp}}
+\doxysubsubsection{\texorpdfstring{getPoisonedInstance()}{getPoisonedInstance()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{stack_8h_a1e651c3ee0c1beff1aebd53973ed1ad6}{elem\+\_\+t}} get\+Poisoned\+Instance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+User defined function that returns a poisoned instance of their type for debug
+
+\begin{DoxyReturn}{Returns}
+A poisoned instance of the user type for debug 
+\end{DoxyReturn}
+\mbox{\Hypertarget{stack_8cpp_af5e8904cca23bb913287e1e653255800}\label{stack_8cpp_af5e8904cca23bb913287e1e653255800}} 
+\index{stack.cpp@{stack.cpp}!hashData@{hashData}}
+\index{hashData@{hashData}!stack.cpp@{stack.cpp}}
+\doxysubsubsection{\texorpdfstring{hashData()}{hashData()}}
+{\footnotesize\ttfamily size\+\_\+t hash\+Data (\begin{DoxyParamCaption}\item[{void $\ast$}]{data,  }\item[{size\+\_\+t}]{size }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{stack_8cpp_ae0881f60155acc7402d81b15113ff073}\label{stack_8cpp_ae0881f60155acc7402d81b15113ff073}} 
+\index{stack.cpp@{stack.cpp}!hashStr@{hashStr}}
+\index{hashStr@{hashStr}!stack.cpp@{stack.cpp}}
+\doxysubsubsection{\texorpdfstring{hashStr()}{hashStr()}}
+{\footnotesize\ttfamily size\+\_\+t hash\+Str (\begin{DoxyParamCaption}\item[{const char $\ast$}]{s }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{stack_8cpp_ac1be3fc7295354a0a0cbe65cc82baefd}\label{stack_8cpp_ac1be3fc7295354a0a0cbe65cc82baefd}} 
+\index{stack.cpp@{stack.cpp}!isEqualBytes@{isEqualBytes}}
+\index{isEqualBytes@{isEqualBytes}!stack.cpp@{stack.cpp}}
+\doxysubsubsection{\texorpdfstring{isEqualBytes()}{isEqualBytes()}}
+{\footnotesize\ttfamily bool is\+Equal\+Bytes (\begin{DoxyParamCaption}\item[{const void $\ast$}]{elem1,  }\item[{const void $\ast$}]{elem2,  }\item[{size\+\_\+t}]{size }\end{DoxyParamCaption})}
+
+Performs a bytewise comparison of two instances of the same type
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em elem1} & Pointer to the first element \\
+\hline
+\mbox{\texttt{ in}}  & {\em elem2} & Pointer to the second element \\
+\hline
+\mbox{\texttt{ in}}  & {\em size} & Size of the type\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if all bytes are equal, false otherwise 
 \end{DoxyReturn}
 \mbox{\Hypertarget{stack_8cpp_acaa4b30c616f979006371a1f58feda76}\label{stack_8cpp_acaa4b30c616f979006371a1f58feda76}} 
 \index{stack.cpp@{stack.cpp}!StackCtor\_@{StackCtor\_}}
@@ -127,6 +258,12 @@ Checks if the given stack is valid
 \begin{DoxyReturn}{Returns}
 0 if the stack is valid, one of the values of the Stk\+Error otherwise 
 \end{DoxyReturn}
+\mbox{\Hypertarget{stack_8cpp_a73e03bb5f15d22ae4c031480f6ae692e}\label{stack_8cpp_a73e03bb5f15d22ae4c031480f6ae692e}} 
+\index{stack.cpp@{stack.cpp}!StackHash@{StackHash}}
+\index{StackHash@{StackHash}!stack.cpp@{stack.cpp}}
+\doxysubsubsection{\texorpdfstring{StackHash()}{StackHash()}}
+{\footnotesize\ttfamily size\+\_\+t Stack\+Hash (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structStack}{Stack}} $\ast$}]{stack }\end{DoxyParamCaption})}
+
 \mbox{\Hypertarget{stack_8cpp_a8b1db7026bbf2010a98312a78c214aca}\label{stack_8cpp_a8b1db7026bbf2010a98312a78c214aca}} 
 \index{stack.cpp@{stack.cpp}!StackPop@{StackPop}}
 \index{StackPop@{StackPop}!stack.cpp@{stack.cpp}}
@@ -179,6 +316,12 @@ Dynamically resizes the given stack
 \begin{DoxyReturn}{Returns}
 1 on success, 0 on failure 
 \end{DoxyReturn}
+\mbox{\Hypertarget{stack_8cpp_af57c9343e4f952fd48d23c54211c9cde}\label{stack_8cpp_af57c9343e4f952fd48d23c54211c9cde}} 
+\index{stack.cpp@{stack.cpp}!StackTop@{StackTop}}
+\index{StackTop@{StackTop}!stack.cpp@{stack.cpp}}
+\doxysubsubsection{\texorpdfstring{StackTop()}{StackTop()}}
+{\footnotesize\ttfamily void Stack\+Top (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structStack}{Stack}} $\ast$}]{stack,  }\item[{void $\ast$}]{dest,  }\item[{int $\ast$}]{err }\end{DoxyParamCaption})}
+
 \mbox{\Hypertarget{stack_8cpp_aceabd4a4767b29cd82fb91f7592538a2}\label{stack_8cpp_aceabd4a4767b29cd82fb91f7592538a2}} 
 \index{stack.cpp@{stack.cpp}!writeErrCode@{writeErrCode}}
 \index{writeErrCode@{writeErrCode}!stack.cpp@{stack.cpp}}

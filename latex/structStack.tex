@@ -12,13 +12,15 @@ Declares a stack data structure as a struct.
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-void $\ast$ \mbox{\hyperlink{structStack_ac6da0059516e42463ddacb5f859ec06c}{data}}
-\item 
-size\+\_\+t \mbox{\hyperlink{structStack_aa996b7e0073208dacfcbff9c633daec0}{elem\+Size}}
+\mbox{\hyperlink{stack_8h_a8d64a52b00393b325e18fdabe2dbe985}{canary\+\_\+t}} \mbox{\hyperlink{structStack_a141734e8756441b12939530030921bad}{canary\+Left}}
 \item 
 size\+\_\+t \mbox{\hyperlink{structStack_a3a469595caaaf49bbce059efabbe07b5}{size}}
 \item 
 size\+\_\+t \mbox{\hyperlink{structStack_afb6d4ad9d2904c20d50102d310c963e0}{capacity}}
+\item 
+size\+\_\+t \mbox{\hyperlink{structStack_aa996b7e0073208dacfcbff9c633daec0}{elem\+Size}}
+\item 
+void $\ast$ \mbox{\hyperlink{structStack_ac6da0059516e42463ddacb5f859ec06c}{data}}
 \item 
 const char $\ast$ \mbox{\hyperlink{structStack_a765d21bea881872543dfbd55e702210d}{type\+Name}}
 \item 
@@ -27,6 +29,10 @@ const char $\ast$ \mbox{\hyperlink{structStack_ace9d125940ec93ff78583875dfeb563f
 const char $\ast$ \mbox{\hyperlink{structStack_a8907636dc2f0bb22e84aea5a0c7449e9}{ctor\+Call\+File}}
 \item 
 int \mbox{\hyperlink{structStack_ad91d76b7a39acafa1ddef12cdd01574d}{ctor\+Call\+Line}}
+\item 
+size\+\_\+t \mbox{\hyperlink{structStack_ae046b1842476a23e7d28d03ad4e711d1}{hash}}
+\item 
+\mbox{\hyperlink{stack_8h_a8d64a52b00393b325e18fdabe2dbe985}{canary\+\_\+t}} \mbox{\hyperlink{structStack_aae273200928d2237b2d71d5571d42c58}{canary\+Right}}
 \end{DoxyCompactItemize}
 
 
@@ -34,6 +40,18 @@ int \mbox{\hyperlink{structStack_ad91d76b7a39acafa1ddef12cdd01574d}{ctor\+Call\+
 Declares a stack data structure as a struct. 
 
 \doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{structStack_a141734e8756441b12939530030921bad}\label{structStack_a141734e8756441b12939530030921bad}} 
+\index{Stack@{Stack}!canaryLeft@{canaryLeft}}
+\index{canaryLeft@{canaryLeft}!Stack@{Stack}}
+\doxysubsubsection{\texorpdfstring{canaryLeft}{canaryLeft}}
+{\footnotesize\ttfamily \mbox{\hyperlink{stack_8h_a8d64a52b00393b325e18fdabe2dbe985}{canary\+\_\+t}} Stack\+::canary\+Left}
+
+\mbox{\Hypertarget{structStack_aae273200928d2237b2d71d5571d42c58}\label{structStack_aae273200928d2237b2d71d5571d42c58}} 
+\index{Stack@{Stack}!canaryRight@{canaryRight}}
+\index{canaryRight@{canaryRight}!Stack@{Stack}}
+\doxysubsubsection{\texorpdfstring{canaryRight}{canaryRight}}
+{\footnotesize\ttfamily \mbox{\hyperlink{stack_8h_a8d64a52b00393b325e18fdabe2dbe985}{canary\+\_\+t}} Stack\+::canary\+Right}
+
 \mbox{\Hypertarget{structStack_afb6d4ad9d2904c20d50102d310c963e0}\label{structStack_afb6d4ad9d2904c20d50102d310c963e0}} 
 \index{Stack@{Stack}!capacity@{capacity}}
 \index{capacity@{capacity}!Stack@{Stack}}
@@ -70,7 +88,13 @@ Pointer to the stack data array \mbox{\Hypertarget{structStack_aa996b7e0073208da
 \doxysubsubsection{\texorpdfstring{elemSize}{elemSize}}
 {\footnotesize\ttfamily size\+\_\+t Stack\+::elem\+Size}
 
-Size of the stored type in bytes \mbox{\Hypertarget{structStack_a3a469595caaaf49bbce059efabbe07b5}\label{structStack_a3a469595caaaf49bbce059efabbe07b5}} 
+Size of the stored type in bytes \mbox{\Hypertarget{structStack_ae046b1842476a23e7d28d03ad4e711d1}\label{structStack_ae046b1842476a23e7d28d03ad4e711d1}} 
+\index{Stack@{Stack}!hash@{hash}}
+\index{hash@{hash}!Stack@{Stack}}
+\doxysubsubsection{\texorpdfstring{hash}{hash}}
+{\footnotesize\ttfamily size\+\_\+t Stack\+::hash}
+
+\mbox{\Hypertarget{structStack_a3a469595caaaf49bbce059efabbe07b5}\label{structStack_a3a469595caaaf49bbce059efabbe07b5}} 
 \index{Stack@{Stack}!size@{size}}
 \index{size@{size}!Stack@{Stack}}
 \doxysubsubsection{\texorpdfstring{size}{size}}

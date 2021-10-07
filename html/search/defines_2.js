@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['debug_5fmode_0',['DEBUG_MODE',['../stack_8h.html#ac80a3592e72fd96b772ee47a7d8e0d0a',1,'stack.h']]]
+  ['b_0',['B',['../stack_8cpp.html#a111da81ae5883147168bbb8366377b10',1,'stack.cpp']]]
 ];

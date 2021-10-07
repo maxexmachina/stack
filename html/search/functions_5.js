@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['writeerrcode_0',['writeErrCode',['../stack_8h.html#aceabd4a4767b29cd82fb91f7592538a2',1,'writeErrCode(int err):&#160;stack.cpp'],['../stack_8cpp.html#aceabd4a4767b29cd82fb91f7592538a2',1,'writeErrCode(int err):&#160;stack.cpp']]],
-  ['writetolog_1',['writeToLog',['../log_8h.html#a52cdc2554f9440eadc5454f99a2923ea',1,'writeToLog(const char *format ...):&#160;log.cpp'],['../log_8cpp.html#a52cdc2554f9440eadc5454f99a2923ea',1,'writeToLog(const char *format ...):&#160;log.cpp']]]
+  ['main_0',['main',['../main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main.cpp']]],
+  ['mymemcpy_1',['myMemCpy',['../mymemcpy_8h.html#a686a39efd77c5d64664ae91e36acf1de',1,'myMemCpy(void *dest, void *src, size_t n):&#160;mymemcpy.cpp'],['../mymemcpy_8cpp.html#a686a39efd77c5d64664ae91e36acf1de',1,'myMemCpy(void *dest, void *src, size_t n):&#160;mymemcpy.cpp']]]
 ];

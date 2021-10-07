@@ -1,0 +1,12 @@
+var searchData=
+[
+  ['stackctor_5f_0',['StackCtor_',['../stack_8cpp.html#acaa4b30c616f979006371a1f58feda76',1,'StackCtor_(Stack *stack, size_t elemSize, size_t capacity, callInfo info):&#160;stack.cpp'],['../stack_8h.html#acaa4b30c616f979006371a1f58feda76',1,'StackCtor_(Stack *stack, size_t elemSize, size_t capacity, callInfo info):&#160;stack.cpp']]],
+  ['stackdtor_1',['StackDtor',['../stack_8h.html#a282766b4bc512d86d5aa62efead2fc27',1,'StackDtor(Stack *stack):&#160;stack.cpp'],['../stack_8cpp.html#a282766b4bc512d86d5aa62efead2fc27',1,'StackDtor(Stack *stack):&#160;stack.cpp']]],
+  ['stackdump_5f_2',['StackDump_',['../stack_8h.html#a520eb42f54c34742009160bd854f7b9b',1,'StackDump_(Stack *stack, const char *reason, callInfo info, const char *stkName):&#160;stack.cpp'],['../stack_8cpp.html#a520eb42f54c34742009160bd854f7b9b',1,'StackDump_(Stack *stack, const char *reason, callInfo info, const char *stkName):&#160;stack.cpp']]],
+  ['stackerror_3',['StackError',['../stack_8h.html#aa303d7ea38acea2b29fe6907e1a4605a',1,'StackError(Stack *stack):&#160;stack.cpp'],['../stack_8cpp.html#aa303d7ea38acea2b29fe6907e1a4605a',1,'StackError(Stack *stack):&#160;stack.cpp']]],
+  ['stackhash_4',['StackHash',['../stack_8cpp.html#a73e03bb5f15d22ae4c031480f6ae692e',1,'StackHash(Stack *stack):&#160;stack.cpp'],['../stack_8h.html#a73e03bb5f15d22ae4c031480f6ae692e',1,'StackHash(Stack *stack):&#160;stack.cpp']]],
+  ['stackpop_5',['StackPop',['../stack_8h.html#ac929759ec3f8d934f062955746e8c1eb',1,'StackPop(Stack *stack, void *dest, int *err=nullptr):&#160;stack.cpp'],['../stack_8cpp.html#a8b1db7026bbf2010a98312a78c214aca',1,'StackPop(Stack *stack, void *dest, int *err):&#160;stack.cpp']]],
+  ['stackpush_6',['StackPush',['../stack_8h.html#a33e6efdcf8c2623ce32ba4724c5f0b68',1,'StackPush(Stack *stack, void *src, int *err=nullptr):&#160;stack.cpp'],['../stack_8cpp.html#a1f7449f58b080af56ab71f1d905fb02e',1,'StackPush(Stack *stack, void *src, int *err):&#160;stack.cpp']]],
+  ['stackresize_7',['StackResize',['../stack_8h.html#ab678ced17c93558a89d06ce2a5a58242',1,'StackResize(Stack *stack, size_t size):&#160;stack.cpp'],['../stack_8cpp.html#ab678ced17c93558a89d06ce2a5a58242',1,'StackResize(Stack *stack, size_t size):&#160;stack.cpp']]],
+  ['stacktop_8',['StackTop',['../stack_8h.html#af57c9343e4f952fd48d23c54211c9cde',1,'StackTop(Stack *stack, void *dest, int *err):&#160;stack.cpp'],['../stack_8cpp.html#af57c9343e4f952fd48d23c54211c9cde',1,'StackTop(Stack *stack, void *dest, int *err):&#160;stack.cpp']]]
+];

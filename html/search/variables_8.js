@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['typename_0',['typeName',['../structStack.html#a765d21bea881872543dfbd55e702210d',1,'Stack']]]
+  ['size_0',['size',['../structStack.html#a3a469595caaaf49bbce059efabbe07b5',1,'Stack']]]
 ];

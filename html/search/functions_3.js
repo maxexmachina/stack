@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['main_0',['main',['../main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main.cpp']]],
-  ['mymemcpy_1',['myMemCpy',['../mymemcpy_8h.html#a686a39efd77c5d64664ae91e36acf1de',1,'myMemCpy(void *dest, void *src, size_t n):&#160;mymemcpy.cpp'],['../mymemcpy_8cpp.html#a686a39efd77c5d64664ae91e36acf1de',1,'myMemCpy(void *dest, void *src, size_t n):&#160;mymemcpy.cpp']]]
+  ['hashdata_0',['hashData',['../stack_8h.html#af5e8904cca23bb913287e1e653255800',1,'hashData(void *data, size_t size):&#160;stack.cpp'],['../stack_8cpp.html#af5e8904cca23bb913287e1e653255800',1,'hashData(void *data, size_t size):&#160;stack.cpp']]],
+  ['hashstr_1',['hashStr',['../stack_8h.html#ae0881f60155acc7402d81b15113ff073',1,'hashStr(const char *s):&#160;stack.cpp'],['../stack_8cpp.html#ae0881f60155acc7402d81b15113ff073',1,'hashStr(const char *s):&#160;stack.cpp']]]
 ];
