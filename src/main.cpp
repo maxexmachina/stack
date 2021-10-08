@@ -5,6 +5,7 @@
 
 #include "../include/stack.h"
 #include "../include/log.h"
+#include "../include/test.h"
 
 int main() {
     Stack stack = {};
@@ -22,6 +23,8 @@ int main() {
         StackPop(&stack, &v);
     }
     StackDtor(&stack);
+
+    torture();
 
     if (closeLog() != 1) {
         printf("There was an error closing log file : %s\n", strerror(errno));
