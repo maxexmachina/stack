@@ -309,10 +309,9 @@ int StackResize(Stack *stack, size_t size) {
     stack->capacity = newCap;
 
 #if DEBUG_MODE > 0
-    elem_t poisoned = {};
-    for (size_t i = stack->size; i < stack->capacity; i++) {
+    for (size_t i = stack->size; i < stack->capacity; ++i) {
+        elem_t poisoned = getPoisonedInstance();
         myMemCpy(getIndexAdress(stack->data, i, stack->elemSize), &poisoned, stack->elemSize);
-        printf("%lld\n", (*((elem_t *)getIndexAdress(stack->data, i, stack->elemSize))).a);
     }
 #endif
 
