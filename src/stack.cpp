@@ -308,6 +308,14 @@ int StackResize(Stack *stack, size_t size) {
 #endif
     stack->capacity = newCap;
 
+#if DEBUG_MODE > 0
+    elem_t poisoned = {};
+    for (size_t i = stack->size; i < stack->capacity; i++) {
+        myMemCpy(getIndexAdress(stack->data, i, stack->elemSize), &poisoned, stack->elemSize);
+        printf("%lld\n", (*((elem_t *)getIndexAdress(stack->data, i, stack->elemSize))).a);
+    }
+#endif
+
 #if DEBUG_MODE > 2
     stack->hash = StackHash(stack);
 #endif
@@ -390,6 +398,10 @@ void StackPop(Stack *stack, void *dest, int *err) {
 
     myMemCpy(dest, getIndexAdress(stack->data, --stack->size, stack->elemSize),
              stack->elemSize);
+#if DEBUG_MODE > 0
+    elem_t poisoned = getPoisonedInstance();
+    myMemCpy(getIndexAdress(stack->data, stack->size, stack->elemSize), &poisoned, stack->elemSize);
+#endif
 #if DEBUG_MODE > 2
     stack->hash = StackHash(stack);
 #endif
