@@ -39,10 +39,12 @@ bool isEqualBytes(const void *elem1, const void *elem2, size_t size) {
 
 #if DEBUG_MODE > 1
 canary_t *getDataCanaryRight(Stack *stack) {
+    assert(stack);
     return (canary_t *)getIndexAdress(stack->data, stack->capacity, stack->elemSize);
 }
 
 canary_t *getDataCanaryLeft(Stack *stack) {
+    assert(stack);
     return (canary_t *)((char *)stack->data - sizeof(canary_t));
 }
 #endif
@@ -74,7 +76,9 @@ int StackError(Stack *stack) {
 #endif
 #if DEBUG_MODE > 2
     size_t hash = stack->hash;
-    if (StackHash(stack) != hash) {
+    size_t newHash = StackHash(stack);
+    if (newHash != hash) {
+        stack->hash = newHash;
         return STK_HASH_FLR;
     }
 #endif
@@ -186,7 +190,7 @@ int StackDump_(Stack *stack, const char *reason, callInfo info, const char *stkN
         printf("Dumping error\n");
         return 0;
     } 
-
+    
     if (errCode != 0) {
         closeLog();
     }
@@ -265,6 +269,11 @@ int StackCtor_(Stack *stack, size_t elemSize, size_t capacity, callInfo info) {
     stack->ctorCallFuncName = info.funcName;
     stack->ctorCallFile = info.file;
     stack->ctorCallLine = info.line; 
+
+    elem_t poisoned = getPoisonedInstance();
+    for (size_t i = 0; i < stack->capacity; ++i) {
+        myMemCpy(getIndexAdress(stack->data, i, stack->elemSize), &poisoned, stack->elemSize);
+    }
 
 #if DEBUG_MODE > 1
     stack->canaryLeft = canaryVal; 

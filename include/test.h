@@ -4,11 +4,15 @@
 #include "stack.h"
 
 struct TortureChamber {
-    char execLeft[1];
+    int execLeft[1];
     Stack victim;
-    char execRight[1];
+    int execRight[1];
 };
 
-int torture();
+void tortureLeft();
+
+void tortureRight();
+
+int testStack();
 
 #endif
